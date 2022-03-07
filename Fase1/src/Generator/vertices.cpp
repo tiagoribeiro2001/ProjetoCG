@@ -10,26 +10,21 @@ figure generate::createPlane(float x, float z) {
     float z1 = z / 2;
     float cdiv = x / z;
 
-    float zinit = -x1;
 
     int count = 0;
 
-    for(float xinit = -x1; xinit <= x1; xinit += cdiv){
-        for(float zinit = ){
+    for(float auxZ = -x1; auxZ < x1; auxZ += cdiv){
+        for(float auxX = -x1; auxX < x1; auxX += cdiv){
 
+            f.addPoint(auxX, 0, auxZ);
+            f.addPoint(auxX, 0, auxZ + cdiv);
+            f.addPoint(auxX + cdiv, 0, auxZ + cdiv);
+
+            f.addPoint(auxX, 0, auxZ);
+            f.addPoint(auxX + cdiv, 0, auxZ + cdiv);
+            f.addPoint(auxX + cdiv, 0, auxZ);
         }
-
     }
-
-    //Triângulo 1
-    f.addPoint(x1, 0, z1);
-    f.addPoint(x1, 0, -z1);
-    f.addPoint(-x1, 0, -z1);
-
-    // Triângulo 2
-    f.addPoint(-x1, 0, -z1);
-    f.addPoint(-x1, 0, z1);
-    f.addPoint(x1, 0, z1);
 
     return f;
 }

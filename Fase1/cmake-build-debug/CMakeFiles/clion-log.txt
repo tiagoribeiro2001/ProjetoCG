@@ -1,4 +1,4 @@
-/home/tiago/Documents/CLion-2019.3.3/clion-2019.3.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/Projeto/Fase1"
+/home/tiago/Documents/CLion-2019.3.3/clion-2019.3.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1"
 CMake Warning (dev) in CMakeLists.txt:
   No project() command is present.  The top-level CMakeLists.txt file must
   contain a literal, direct call to the project() command.  Add a line of
@@ -28,4 +28,4 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/Projeto/Fase1/cmake-build-debug
+-- Build files have been written to: /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug

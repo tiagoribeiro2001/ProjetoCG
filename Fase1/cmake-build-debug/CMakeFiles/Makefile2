@@ -44,10 +44,10 @@ RM = /home/tiago/Documents/CLion-2019.3.3/clion-2019.3.3/bin/cmake/linux/bin/cma
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/Projeto/Fase1"
+CMAKE_SOURCE_DIR = "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/Projeto/Fase1/cmake-build-debug"
+CMAKE_BINARY_DIR = "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug"
 
 #=============================================================================
 # Directory level rules for the build root directory
