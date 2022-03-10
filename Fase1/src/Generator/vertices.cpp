@@ -2,16 +2,12 @@
 #include <cmath>
 #include "vertices.hpp"
 
-figure generate::createPlane(float x, float z) {
+figure generate::createPlane(float units, float divs) {
 
     figure f;
 
-    float x1 = x / 2;
-    float z1 = z / 2;
-    float cdiv = x / z;
-
-
-    int count = 0;
+    float x1 = units / 2;
+    float cdiv = units / divs;
 
     for(float auxZ = -x1; auxZ < x1; auxZ += cdiv){
         for(float auxX = -x1; auxX < x1; auxX += cdiv){
@@ -29,140 +25,79 @@ figure generate::createPlane(float x, float z) {
     return f;
 }
 
-figure generate::createBox(float x, float y, float z, int camadas) {
+figure generate::createBox(float units, float divs) {
     figure f;
 
-    float x1 = x / 2;
-    float z1 = z / 2;
-    float camadaX = x / camadas;
-    float camadaY = y / camadas;
-    float camadaZ = z / camadas;
-    int i, j;
+    float x1 = units / 2;
+    float cdiv = units / divs;
 
-    // Desenhar a base
-    float auxX = -x1;
-    float auxZ = -z1;
-    for (i = 0; i < camadas; i++) {
-        for (j = 0; j < camadas; j++) {
+    // Desenhar os dois planos no eixo dos yy's
+    for(float auxZ = -x1; auxZ < x1; auxZ += cdiv){
+        for(float auxX = -x1; auxX < x1; auxX += cdiv){
 
-            f.addPoint(auxX, 0, auxZ);
-            f.addPoint(auxX + camadaX, 0, auxZ);
-            f.addPoint(auxX + camadaX, 0, auxZ + camadaZ);
+            f.addPoint(auxX, x1, auxZ);
+            f.addPoint(auxX, x1, auxZ + cdiv);
+            f.addPoint(auxX + cdiv, x1, auxZ + cdiv);
 
-            f.addPoint(auxX + camadaX, 0, auxZ + camadaZ);
-            f.addPoint(auxX, 0, auxZ + camadaZ);
-            f.addPoint(auxX, 0, auxZ);
+            f.addPoint(auxX, x1, auxZ);
+            f.addPoint(auxX + cdiv, x1, auxZ + cdiv);
+            f.addPoint(auxX + cdiv, x1, auxZ);
 
-            auxZ += camadaZ;
+            f.addPoint(auxX, -x1, auxZ);
+            f.addPoint(auxX + cdiv, -x1, auxZ + cdiv);
+            f.addPoint(auxX, -x1, auxZ + cdiv);
+
+            f.addPoint(auxX, -x1, auxZ);
+            f.addPoint(auxX + cdiv, -x1, auxZ);
+            f.addPoint(auxX + cdiv, -x1, auxZ + cdiv);
         }
-        auxZ = -z1;
-        auxX += camadaX;
     }
 
-    // Desenhar o teto
-    auxX = -x1;
-    auxZ = -z1;
-    float auxY = y;
-    for (i = 0; i < camadas; i++) {
-        for (j = 0; j < camadas; j++) {
+    // Desenhar os dois planos no eixos dos xx's
+    for(float auxZ = -x1; auxZ < x1; auxZ += cdiv){
+        for(float auxY = -x1; auxY < x1; auxY += cdiv){
 
-            f.addPoint(auxX + camadaX, auxY, auxZ + camadaZ);
-            f.addPoint(auxX + camadaX, auxY, auxZ);
-            f.addPoint(auxX, auxY, auxZ);
+            f.addPoint(x1, auxY, auxZ);
+            f.addPoint(x1, auxY + cdiv, auxZ);
+            f.addPoint(x1, auxY, auxZ + cdiv);
 
-            f.addPoint(auxX, auxY, auxZ);
-            f.addPoint(auxX, auxY, auxZ + camadaZ);
-            f.addPoint(auxX + camadaX, auxY, auxZ + camadaZ);
+            f.addPoint(x1, auxY + cdiv, auxZ + cdiv);
+            f.addPoint(x1, auxY, auxZ + cdiv);
+            f.addPoint(x1, auxY + cdiv, auxZ);
 
-            auxZ += camadaZ;
+            f.addPoint(-x1, auxY, auxZ);
+            f.addPoint(-x1, auxY, auxZ + cdiv);
+            f.addPoint(-x1, auxY + cdiv, auxZ);
+
+            f.addPoint(-x1, auxY + cdiv, auxZ + cdiv);
+            f.addPoint(-x1, auxY + cdiv, auxZ);
+            f.addPoint(-x1, auxY, auxZ + cdiv);
+
         }
-        auxZ = -z1;
-        auxX += camadaX;
     }
 
-    // Desenhar o lado direito
-    auxX = x1;
-    auxZ = z1;
-    auxY = y;
-    for (i = 0; i < camadas; i++) {
-        for (j = 0; j < camadas; j++) {
+    // Desenhar os dois planos no eixos dos zz's
+    for(float auxY = -x1; auxY < x1; auxY += cdiv){
+        for(float auxX = -x1; auxX < x1; auxX += cdiv){
 
-            f.addPoint(auxX, auxY, auxZ);
-            f.addPoint(auxX, auxY - camadaY, auxZ);
-            f.addPoint(auxX, auxY - camadaY, auxZ - camadaZ);
+            f.addPoint(auxX, auxY, x1);
+            f.addPoint(auxX + cdiv, auxY, x1);
+            f.addPoint(auxX , auxY + cdiv, x1);
 
-            f.addPoint(auxX, auxY - camadaY, auxZ - camadaZ);
-            f.addPoint(auxX, auxY, auxZ - camadaZ);
-            f.addPoint(auxX, auxY, auxZ);
+            f.addPoint(auxX, auxY, x1);
+            f.addPoint(auxX + cdiv, auxY + cdiv, x1);
+            f.addPoint(auxX, auxY + cdiv, x1);
 
-            auxZ -= camadaZ;
+            f.addPoint(auxX, auxY, -x1);
+            f.addPoint(auxX , auxY + cdiv, -x1);
+            f.addPoint(auxX + cdiv, auxY, -x1);
+
+            f.addPoint(auxX, auxY, -x1);
+            f.addPoint(auxX, auxY + cdiv, -x1);
+            f.addPoint(auxX + cdiv, auxY + cdiv, -x1);
         }
-        auxZ = z1;
-        auxY -= camadaY;
     }
 
-    // Desenhar o lado esquerdo
-    auxX = -x1;
-    auxZ = -z1;
-    auxY = y;
-    for (i = 0; i < camadas; i++) {
-        for (j = 0; j < camadas; j++) {
-
-            f.addPoint(auxX, auxY, auxZ);
-            f.addPoint(auxX, auxY - camadaY, auxZ);
-            f.addPoint(auxX, auxY - camadaY, auxZ + camadaZ);
-
-            f.addPoint(auxX, auxY - camadaY, auxZ + camadaZ);
-            f.addPoint(auxX, auxY, auxZ + camadaZ);
-            f.addPoint(auxX, auxY, auxZ);
-
-            auxZ += camadaZ;
-        }
-        auxZ = -z1;
-        auxY -= camadaY;
-    }
-
-    // Desenhar frente
-    auxX = -x1;
-    auxZ = z1;
-    auxY = y;
-    for (i = 0; i < camadas; i++) {
-        for (j = 0; j < camadas; j++) {
-
-            f.addPoint(auxX, auxY, auxZ);
-            f.addPoint(auxX, auxY - camadaY, auxZ);
-            f.addPoint(auxX + camadaX, auxY - camadaY, auxZ);
-
-            f.addPoint(auxX + camadaX, auxY - camadaY, auxZ);
-            f.addPoint(auxX + camadaX, auxY, auxZ);
-            f.addPoint(auxX, auxY, auxZ);
-
-            auxX += camadaX;
-        }
-        auxX = -x1;
-        auxY -= camadaY;
-    }
-
-    // Desenhar trás
-    auxX = x1;
-    auxZ = -z1;
-    auxY = y;
-    for (i = 0; i < camadas; i++) {
-        for (j = 0; j < camadas; j++) {
-
-            f.addPoint(auxX, auxY, auxZ);
-            f.addPoint(auxX, auxY - camadaY, auxZ);
-            f.addPoint(auxX - camadaX, auxY - camadaY, auxZ);
-
-            f.addPoint(auxX - camadaX, auxY - camadaY, auxZ);
-            f.addPoint(auxX - camadaX, auxY, auxZ);
-            f.addPoint(auxX, auxY, auxZ);
-
-            auxX -= camadaX;
-        }
-        auxX = x1;
-        auxY -= camadaY;
-    }
     return f;
 }
 
