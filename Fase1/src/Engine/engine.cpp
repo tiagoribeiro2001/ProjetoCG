@@ -7,7 +7,9 @@
 
 using namespace draw;
 using namespace std;
+using namespace structs;
 
+cameraSettings cam = {0,0,0,0,0,0,0,0,0,0,0,0};
 map<int, figure> figurasMap;
 int ativarFig = 0; //Vai buscar a chave/identificador da figura para desenha-la após obter permissão
 
@@ -27,7 +29,7 @@ void changeSize(int w, int h)
     // Set the viewport to be the entire window
     glViewport(0, 0, w, h);
     // Set the perspective
-    gluPerspective(45.0f, ratio, 1.0f, 1000.0f);
+    gluPerspective(cam.settings[9], ratio, cam.settings[10], cam.settings[11]);
     // return to the model view matrix mode
     glMatrixMode(GL_MODELVIEW);
 }
@@ -40,9 +42,9 @@ void renderScene(void){
 
     // set camera
     glLoadIdentity();
-    gluLookAt(5.0, 5.0, 5.0,
-              0.0, 0.0, 0.0,
-              0.0f, 1.0f, 0.0f);
+    gluLookAt(cam.settings[0], cam.settings[1], cam.settings[2],
+              cam.settings[3], cam.settings[4], cam.settings[5],
+              cam.settings[6], cam.settings[7], cam.settings[8]);
 
 
     drawReferencial();
@@ -60,12 +62,28 @@ void renderScene(void){
 }
 
 int lerFicheiroXML(std::string xml) {
-    TiXmlDocument f;
+    TiXmlDocument fich;
     //Load do ficheiro XML com o nome que foi passado como argumento
-    string name = getPath() + xml;
-    bool b = f.LoadFile(name.c_str());
 
-    if (b) {
+    if (fich.LoadFile(xml.c_str())) {
+        TiXmlElement* worldElement =  fich.RootElement();
+        TiXmlElement* cameraElement = worldElement->FirstChildElement();
+        TiXmlElement* cameraChild = cameraElement->FirstChildElement();
+        int i = 0;
+
+        for (; cameraChild!= NULL; cameraChild = cameraChild->NextSiblingElement()) {
+            TiXmlAttribute * attribute = cameraChild->FirstAttribute();
+
+            for (; attribute != NULL; attribute = attribute->Next(), i++) {
+                cam.settings[i] = std::stof(attribute->Value());
+                std::cout << cam.settings[i] << std::endl;
+            }
+        }
+
+        TiXmlElement* groupElement = cameraElement->NextSiblingElement();
+        std::cout << groupElement->Value() << std::endl;
+
+        /*
         TiXmlElement* root = f.RootElement();
         int i=0;
 
@@ -76,7 +94,7 @@ int lerFicheiroXML(std::string xml) {
             std::fstream fs;
 
             //Abre o ficheiro .3d
-            fs.open(getPath()+ficheiro);
+            fs.open(ficheiro);
             if (fs.is_open()) {
                 figure figura;
                 string line;

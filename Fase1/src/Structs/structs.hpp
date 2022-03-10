@@ -14,6 +14,10 @@ namespace structs{
         float z;
     };
 
+    struct cameraSettings{
+        float settings[12];
+    };
+
     class figure {
 
     public:

@@ -2,12 +2,12 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="Fase1" targetName="Lib" />
-      <config projectName="Fase1" targetName="engineLib" />
-      <config projectName="Fase1" targetName="generator" />
       <config projectName="Fase1" targetName="structsLib" />
+      <config projectName="Fase1" targetName="engineLib" />
       <config projectName="Fase1" targetName="generatorLib" />
       <config projectName="Fase1" targetName="engine" />
+      <config projectName="Fase1" targetName="generator" />
+      <config projectName="Fase1" targetName="Lib" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -16,7 +16,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="" />
+    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/src/Engine/engine.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/src/Engine/engine.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/engine" beforeDir="false" afterPath="$PROJECT_DIR$/build/engine" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Generator/generator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generator/generator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Structs/structs.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Structs/structs.hpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +112,8 @@
       <workItem from="1646738385877" duration="708000" />
       <workItem from="1646749093438" duration="14000" />
       <workItem from="1646870851030" duration="48000" />
-      <workItem from="1646912874975" duration="2341000" />
+      <workItem from="1646912874975" duration="2529000" />
+      <workItem from="1646922001686" duration="6022000" />
     </task>
     <servers />
   </component>
@@ -129,25 +137,25 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="773" y="300" width="424" height="520" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1646749105516" />
-    <state width="1802" height="275" key="GridCell.Tab.0.bottom" timestamp="1646914082389">
+    <state width="1802" height="275" key="GridCell.Tab.0.bottom" timestamp="1646915404237">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1646914082389" />
-    <state width="1802" height="275" key="GridCell.Tab.0.center" timestamp="1646914082389">
+    <state width="1802" height="275" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1646915404237" />
+    <state width="1802" height="275" key="GridCell.Tab.0.center" timestamp="1646915404236">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1646914082389" />
-    <state width="1802" height="275" key="GridCell.Tab.0.left" timestamp="1646914082388">
+    <state width="1802" height="275" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1646915404236" />
+    <state width="1802" height="275" key="GridCell.Tab.0.left" timestamp="1646915404236">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1646914082388" />
-    <state width="1802" height="275" key="GridCell.Tab.0.right" timestamp="1646914082389">
+    <state width="1802" height="275" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1646915404236" />
+    <state width="1802" height="275" key="GridCell.Tab.0.right" timestamp="1646915404237">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1646914082389" />
-    <state x="652" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1646912875144">
+    <state width="1802" height="275" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1646915404237" />
+    <state x="652" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1646922003168">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="652" y="381" key="com.intellij.ide.util.TipDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1646912875144" />
+    <state x="652" y="381" key="com.intellij.ide.util.TipDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1646922003168" />
   </component>
 </project>

@@ -7,7 +7,7 @@ using namespace generate;
 int createFileType (vector<point> vertices, string name){
 
     ofstream file;
-    
+
     file.open(name);
     for(point p : vertices){
         file << p.x << " ";
