@@ -16,21 +16,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generator/generator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generator/generator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generator/vertices.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generator/vertices.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Structs/structs.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Structs/structs.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Structs/structs.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Structs/structs.hpp" afterDir="false" />
-    </list>
+    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,7 +105,7 @@
       <workItem from="1646738385877" duration="708000" />
       <workItem from="1646749093438" duration="14000" />
       <workItem from="1646870851030" duration="48000" />
-      <workItem from="1646912874975" duration="1970000" />
+      <workItem from="1646912874975" duration="2341000" />
     </task>
     <servers />
   </component>

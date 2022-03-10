@@ -7,9 +7,7 @@ using namespace generate;
 int createFileType (vector<point> vertices, string name){
 
     ofstream file;
-
-    // in out(write) mode
-    // ios::out Open for output operations.
+    
     file.open(name);
     for(point p : vertices){
         file << p.x << " ";
