@@ -1,2 +1,8 @@
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/engineLib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/engine.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/Lib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/generator.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/generatorLib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/cmake-build-debug/CMakeFiles/structsLib.dir

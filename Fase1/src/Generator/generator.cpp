@@ -1,16 +1,16 @@
 #include "../tinyXML/tinyxml.h"
-#include "calculaVertices.hpp"
+#include "vertices.hpp"
 
 using namespace std;
 using namespace generate;
 
 int createFileType (vector<point> vertices, string name){
 
-    fstream file;
+    ofstream file;
 
     // in out(write) mode
     // ios::out Open for output operations.
-    file.open(getPath() + name, ios::out);
+    file.open(name);
     for(point p : vertices){
         file << p.x << " ";
         file << p.y << " ";
@@ -30,11 +30,11 @@ int createFileType (vector<point> vertices, string name){
 int main(int argc, char* argv[]) {
     figure f;
 
-    if(argc<=1) cout << "Missing Arguments" << endl;
+    if(argc<=1) cout << "Missing Arguments on Generator" << endl;
     else {
 
         //Gerar os vértices para o desenho do plano e transcrever para o ficheiro .3d
-        if ((strcmp(argv[1], "Plane") == 0) && (argc == 5)) {
+        if ((strcmp(argv[1], "plane") == 0) && (argc == 5)) {
 
             float units = std::stof(argv[2]);
             float divs = std::stof(argv[3]);
@@ -48,10 +48,9 @@ int main(int argc, char* argv[]) {
         }
 
             //Gerar os vértices para o desenho do cubo/caixa e transcrever para o ficheiro .3d
-        else if ((strcmp(argv[1], "Box") == 0) && (argc == 5)) {
+        else if ((strcmp(argv[1], "box") == 0) && (argc == 5)) {
             float units = std::stof(argv[2]);
             float divs = std::stof(argv[3]);
-            float z = std::stof(argv[4]);
 
             f = createBox(units, divs);
 
@@ -61,7 +60,7 @@ int main(int argc, char* argv[]) {
         }
 
             //Gerar os vértices para o desenho da esfera e transcrever para o ficheiro .3d
-        else if ((strcmp(argv[1], "Sphere") == 0) && (argc == 6)) {
+        else if ((strcmp(argv[1], "sphere") == 0) && (argc == 6)) {
             float radius = std::stof(argv[2]);
             stringstream aux(argv[3]);
             int slices = 0;
@@ -79,7 +78,7 @@ int main(int argc, char* argv[]) {
         }
 
             //Gerar os vértices para o desenho do cone e transcrever para o ficheiro .3d
-        else if ((strcmp(argv[1], "Cone") == 0) && (argc == 7)) {
+        else if ((strcmp(argv[1], "cone") == 0) && (argc == 7)) {
             float radius = std::stof(argv[2]);
             float height = std::stof(argv[3]);
             stringstream aux(argv[4]);
@@ -96,7 +95,7 @@ int main(int argc, char* argv[]) {
             }
         }
         else {
-            std::cout << "\nMissing arguments\n" << std::endl;
+            std::cout << "\nMissing arguments on Generator\n" << std::endl;
         }
     }
 }

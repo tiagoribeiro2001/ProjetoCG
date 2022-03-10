@@ -1,6 +1,3 @@
-#ifndef FASE1_STRUCTS_HPP
-#define FASE1_STRUCTS_HPP
-
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
@@ -27,5 +24,3 @@ namespace structs{
     std::string getPath();
 
 }
-
-#endif //FASE1_STRUCTS_HPP

@@ -10,7 +10,7 @@ static const std::string slash = "/";
 static const std::string slash = "\\";
 #endif
 
-using namespace utils;
+using namespace structs;
 
 // cria um ponto com as dadas coordenadas, e adiciona-o à lista de pontos da figura
 void figure::addPoint(float a, float b, float c) {
@@ -21,7 +21,7 @@ void figure::addPoint(float a, float b, float c) {
     pontos.push_back(p);
 }
 
-std::string utils::getPath(){
+std::string structs::getPath(){
     char path[90];
     return getDir(path, 90) + slash + "3dFiles" + slash;
 }
