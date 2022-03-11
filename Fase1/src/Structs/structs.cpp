@@ -1,14 +1,5 @@
 #include "structs.hpp"
 
-#ifdef __unix__
-#include <unistd.h>
-#define getDir getcwd
-static const std::string slash = "/";
-#else
-#include <direct.h>
-#define getDir _getcwd
-static const std::string slash = "\\";
-#endif
 
 using namespace structs;
 
@@ -19,9 +10,4 @@ void figure::addPoint(float a, float b, float c) {
     p.y = b;
     p.z = c;
     pontos.push_back(p);
-}
-
-std::string structs::getPath(){
-    char path[90];
-    return getDir(path, 90) + slash + "3dFiles" + slash;
 }

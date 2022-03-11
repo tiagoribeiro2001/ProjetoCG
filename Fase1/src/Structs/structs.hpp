@@ -24,7 +24,4 @@ namespace structs{
         std::vector<point> pontos;
         void addPoint(float, float, float);
     };
-
-    std::string getPath();
-
 }

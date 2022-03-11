@@ -2,7 +2,6 @@
 #include "../tinyXML/tinyxml.h"
 
 #include <iostream>
-#include <iterator>
 #include <map>
 
 using namespace draw;
@@ -66,6 +65,8 @@ int lerFicheiroXML(std::string xml) {
     //Load do ficheiro XML com o nome que foi passado como argumento
 
     if (fich.LoadFile(xml.c_str())) {
+
+        // Lê as definições da camera
         TiXmlElement* worldElement =  fich.RootElement();
         TiXmlElement* cameraElement = worldElement->FirstChildElement();
         TiXmlElement* cameraChild = cameraElement->FirstChildElement();
@@ -76,21 +77,18 @@ int lerFicheiroXML(std::string xml) {
 
             for (; attribute != NULL; attribute = attribute->Next(), i++) {
                 cam.settings[i] = std::stof(attribute->Value());
-                std::cout << cam.settings[i] << std::endl;
             }
         }
 
+        // Lê os ficheiros a desenhar
         TiXmlElement* groupElement = cameraElement->NextSiblingElement();
-        std::cout << groupElement->Value() << std::endl;
         TiXmlElement* modelsElement = groupElement->FirstChildElement();
-        std::cout << modelsElement->Value() << std::endl;
         TiXmlElement* modelsChild = modelsElement->FirstChildElement();
 
         int j = 0;
         for (; modelsChild!= NULL; modelsChild = modelsChild->NextSiblingElement()) {
             TiXmlAttribute * attributeName = modelsChild->FirstAttribute();
             string fileName = attributeName->Value();
-            std::cout << fileName << std::endl;
 
             ifstream file;
             file.open(fileName);
@@ -119,7 +117,6 @@ int lerFicheiroXML(std::string xml) {
                     f.addPoint(x1,y1,z1);
                 }
                 file.close();
-                std::cout << f.pontos.size() << std::endl;
                 figurasMap.insert(pair<int, figure>(j, f));
                 j++;
             }
@@ -174,8 +171,6 @@ int main(int argc, char** argv){
             glutInitWindowPosition(100, 100);
             glutInitWindowSize(800, 800);
             glutCreateWindow("Projeto-CG");
-
-
 
             // put callback registry here
             glutDisplayFunc(renderScene);

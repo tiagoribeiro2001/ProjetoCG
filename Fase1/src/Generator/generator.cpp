@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
         }
 
-            //Gerar os vértices para o desenho do cubo/caixa e transcrever para o ficheiro .3d
+        //Gerar os vértices para o desenho do cubo/caixa e transcrever para o ficheiro .3d
         else if ((strcmp(argv[1], "box") == 0) && (argc == 5)) {
             float units = std::stof(argv[2]);
             float divs = std::stof(argv[3]);
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-            //Gerar os vértices para o desenho da esfera e transcrever para o ficheiro .3d
+        //Gerar os vértices para o desenho da esfera e transcrever para o ficheiro .3d
         else if ((strcmp(argv[1], "sphere") == 0) && (argc == 6)) {
             float radius = std::stof(argv[2]);
             stringstream aux(argv[3]);
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
 
         }
 
-            //Gerar os vértices para o desenho do cone e transcrever para o ficheiro .3d
+        //Gerar os vértices para o desenho do cone e transcrever para o ficheiro .3d
         else if ((strcmp(argv[1], "cone") == 0) && (argc == 7)) {
             float radius = std::stof(argv[2]);
             float height = std::stof(argv[3]);
