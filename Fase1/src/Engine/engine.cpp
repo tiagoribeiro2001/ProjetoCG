@@ -82,54 +82,52 @@ int lerFicheiroXML(std::string xml) {
 
         TiXmlElement* groupElement = cameraElement->NextSiblingElement();
         std::cout << groupElement->Value() << std::endl;
+        TiXmlElement* modelsElement = groupElement->FirstChildElement();
+        std::cout << modelsElement->Value() << std::endl;
+        TiXmlElement* modelsChild = modelsElement->FirstChildElement();
 
-        /*
-        TiXmlElement* root = f.RootElement();
-        int i=0;
+        int j = 0;
+        for (; modelsChild!= NULL; modelsChild = modelsChild->NextSiblingElement()) {
+            TiXmlAttribute * attributeName = modelsChild->FirstAttribute();
+            string fileName = attributeName->Value();
+            std::cout << fileName << std::endl;
 
-        //Inicialização do ciclo que percorre pelo ficheiro XML e lê os files que nele estão guardados
-        for (TiXmlElement* elem = root->FirstChild()->ToElement(); elem!=nullptr; elem = elem->NextSiblingElement()) {
+            ifstream file;
+            file.open(fileName);
 
-            const char* ficheiro = elem->Attribute("file");
-            std::fstream fs;
-
-            //Abre o ficheiro .3d
-            fs.open(ficheiro);
-            if (fs.is_open()) {
-                figure figura;
+            if (file.is_open()){
+                figure f;
                 string line;
+
                 float x1, y1, z1 = 0.0f; //Inicializa as coordenadas de cada ponto
 
                 //Lê linha a linha do ficheiro, não esquecendo que cada linha é um vértice/ponto
-                while (getline(fs, line)) {
+                while (getline(file, line)) {
                     float cood[3]; //guarda num array as coordenadas de cada ponto
 
                     std::string delimiter = " ";
                     size_t pos = 0;
                     std::string token;
-                    int i = 0;
+                    int k = 0;
                     while ((pos = line.find(delimiter)) != std::string::npos) {
                         token = line.substr(0, pos);
-                        cood[i] = std::stof(token); //converte para float e guarda a coordenada
-                        i++;
+                        cood[k] = std::stof(token); //converte para float e guarda a coordenada
+                        k++;
                         line.erase(0, pos + delimiter.length());
                     }
                     x1=cood[0],y1=cood[1],z1=cood[2];
-                    figura.addPoint(x1,y1,z1);
+                    f.addPoint(x1,y1,z1);
                 }
-                fs.close();
-                figurasMap.insert(pair<int, figure>(i,figura));
-                i++;
+                file.close();
+                std::cout << f.pontos.size() << std::endl;
+                figurasMap.insert(pair<int, figure>(j, f));
+                j++;
             }
-
-            else{
-                std::cout << "Can't open file!"<< std::endl;
+            else {
+                std::cout << "Can't open file:" + fileName << std::endl;
                 return -1;
             }
         }
-        /* //Este pedaço de código seria para apagar o ficheiro XML
-         if( remove(name.c_str()) != 0 )
-             perror( "Error deleting file" );*/
     }
     else{
         std::cout <<"File does not exist!\n" << std::endl;

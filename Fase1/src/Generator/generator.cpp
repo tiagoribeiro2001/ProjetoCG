@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
             int stacks = 0;
             aux2 >> stacks;
 
-            f = createCone(radius, height, stacks, slices);
+            f = createCone(radius, height, slices, stacks);
 
             if (createFileType(f.pontos, argv[6]) == 0) {
                 std::cout << "Done\n" << std::endl;

@@ -19,6 +19,14 @@ figure generate::createPlane(float units, float divs) {
             f.addPoint(auxX, 0, auxZ);
             f.addPoint(auxX + cdiv, 0, auxZ + cdiv);
             f.addPoint(auxX + cdiv, 0, auxZ);
+
+            f.addPoint(auxX, 0, auxZ);
+            f.addPoint(auxX + cdiv, 0, auxZ + cdiv);
+            f.addPoint(auxX, 0, auxZ + cdiv);
+
+            f.addPoint(auxX, 0, auxZ);
+            f.addPoint(auxX + cdiv, 0, auxZ);
+            f.addPoint(auxX + cdiv, 0, auxZ + cdiv);
         }
     }
 
@@ -81,20 +89,20 @@ figure generate::createBox(float units, float divs) {
         for(float auxX = -x1; auxX < x1; auxX += cdiv){
 
             f.addPoint(auxX, auxY, x1);
-            f.addPoint(auxX + cdiv, auxY, x1);
+            f.addPoint(auxX + cdiv, auxY + cdiv, x1);
             f.addPoint(auxX , auxY + cdiv, x1);
 
             f.addPoint(auxX, auxY, x1);
+            f.addPoint(auxX + cdiv, auxY, x1);
             f.addPoint(auxX + cdiv, auxY + cdiv, x1);
-            f.addPoint(auxX, auxY + cdiv, x1);
 
             f.addPoint(auxX, auxY, -x1);
             f.addPoint(auxX , auxY + cdiv, -x1);
-            f.addPoint(auxX + cdiv, auxY, -x1);
+            f.addPoint(auxX + cdiv, auxY + cdiv, -x1);
 
             f.addPoint(auxX, auxY, -x1);
-            f.addPoint(auxX, auxY + cdiv, -x1);
             f.addPoint(auxX + cdiv, auxY + cdiv, -x1);
+            f.addPoint(auxX + cdiv, auxY, -x1);
         }
     }
 
