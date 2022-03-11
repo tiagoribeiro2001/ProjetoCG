@@ -10,6 +10,7 @@
 			<model file="cone.3d" /> <!-- generator cone 1 2 4 3 cone.3d -->
 			<model file="plano.3d" />
 			<model file="caixa.3d" />
+			<model file="esfera.3d" />
  		</models>
  	</group>
 </world>
