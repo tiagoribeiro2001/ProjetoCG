@@ -9,7 +9,10 @@ figure generate::createPlane(float units, float divs) {
     float x1 = units / 2;
     float cdiv = units / divs;
 
+    // Desenha uma fila a cada iteracao
     for(float auxZ = -x1; auxZ < x1; auxZ += cdiv){
+
+        // Desenha um quadrado virada para cima e para baixo a cada iteracao
         for(float auxX = -x1; auxX < x1; auxX += cdiv){
 
             f.addPoint(auxX, 0, auxZ);
@@ -109,34 +112,41 @@ figure generate::createBox(float units, float divs) {
     return f;
 }
 
-figure generate::createSphere(float radius, int slices, int stacks){
+figure generate::createSphere(float radius, int slices, int stacks) {
     figure f;
 
-    float delta1 = M_PI / stacks;
-    float delta2 = 2 * M_PI / slices;
+    float alpha = (2 * M_PI) / slices;
+    float beta = (M_PI) / stacks;
 
-    for (float i = -M_PI / 2; i < M_PI / 2; i += delta1) {
+    for (int i = 0; i < slices; i++) {
+        for (int j = 0; j < stacks / 2; j++) {
 
-        float aux1 = i + delta1;
+            float atualAlpha = i * alpha;
+            float atualBeta = j * beta;
+            float nextAlpha = (i + 1) * alpha;
+            float nextBeta = (j + 1) * beta;
+
+            // Parte de cima da esfera
+            f.addPoint(radius * cos(atualBeta) * sin(atualAlpha), radius * sin(atualBeta), radius * cos(atualBeta) * cos(atualAlpha));
+            f.addPoint(radius * cos(nextBeta) * sin(nextAlpha), radius * sin(nextBeta), radius * cos(nextBeta) * cos(nextAlpha));
+            f.addPoint(radius * cos(nextBeta) * sin(atualAlpha), radius * sin(nextBeta), radius * cos(nextBeta) * cos(atualAlpha));
+
+            f.addPoint(radius * cos(nextBeta) * sin(nextAlpha), radius * sin(nextBeta), radius * cos(nextBeta) * cos(nextAlpha));
+            f.addPoint(radius * cos(atualBeta) * sin(atualAlpha), radius * sin(atualBeta), radius * cos(atualBeta) * cos(atualAlpha));
+            f.addPoint(radius * cos(atualBeta) * sin(nextAlpha), radius * sin(atualBeta), radius * cos(atualBeta) * cos(nextAlpha));
 
 
-        for (float j = 0; j < 2 * M_PI - delta2; j += delta2) {
+            // Parte de baixo da esfera
+            f.addPoint(radius * cos(-atualBeta) * sin(nextAlpha), radius * sin(-atualBeta), radius * cos(-atualBeta) * cos(nextAlpha));
+            f.addPoint(radius * cos(-atualBeta) * sin(atualAlpha), radius * sin(-atualBeta), radius * cos(-atualBeta) * cos(atualAlpha));
+            f.addPoint(radius * cos(-nextBeta) * sin(atualAlpha), radius * sin(-nextBeta), radius * cos(-nextBeta) * cos(atualAlpha));
 
-            float aux2 = j + delta2;
-
-            //Triângulo 1
-            f.addPoint(cos(aux1) * sin(j) * radius, sin(aux1) * radius, cos(aux1)* cos(j)* radius);
-            f.addPoint(cos(i) * sin(j) * radius, sin(i) * radius, cos(i) * cos(j) * radius);
-            f.addPoint(cos(i) * sin(aux2) * radius,sin(i) * radius, cos(i) * cos(aux2) * radius);
-
-            //Triângulo 2
-            f.addPoint(cos(aux1) * sin(j) * radius, sin(aux1) * radius, cos(aux1)* cos(j)* radius);
-            f.addPoint(cos(i) * sin(aux2) * radius, sin(i) * radius, cos(i)* cos(aux2)* radius);
-            f.addPoint(cos(aux1) * sin(aux2) * radius, sin(aux1) * radius, cos(aux1)* cos(aux2)* radius);
+            f.addPoint(radius * cos(-nextBeta) * sin(atualAlpha), radius * sin(-nextBeta), radius * cos(-nextBeta) * cos(atualAlpha));
+            f.addPoint(radius * cos(-nextBeta) * sin(nextAlpha), radius * sin(-nextBeta), radius * cos(-nextBeta) * cos(nextAlpha));
+            f.addPoint(radius * cos(-atualBeta) * sin(nextAlpha), radius * sin(-atualBeta), radius * cos(-atualBeta) * cos(nextAlpha));
 
         }
     }
-
     return f;
 }
 
