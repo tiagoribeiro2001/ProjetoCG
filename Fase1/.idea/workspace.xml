@@ -5,8 +5,8 @@
       <config projectName="Fase1" targetName="structsLib" />
       <config projectName="Fase1" targetName="Lib" />
       <config projectName="Fase1" targetName="engineLib" />
-      <config projectName="Fase1" targetName="engine" />
       <config projectName="Fase1" targetName="generatorLib" />
+      <config projectName="Fase1" targetName="engine" />
       <config projectName="Fase1" targetName="generator" />
     </generated>
   </component>
@@ -20,14 +20,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/CXX.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/src/Engine/engine.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/src/Engine/engine.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/structsLib.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/structsLib.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/structsLib.dir/src/Structs/structs.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/structsLib.dir/src/Structs/structs.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/engineLib.dir/src/Engine/drawFunctions.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/engineLib.dir/src/Engine/drawFunctions.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/engine" beforeDir="false" afterPath="$PROJECT_DIR$/build/engine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/generator" beforeDir="false" afterPath="$PROJECT_DIR$/build/generator" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libstructsLib.a" beforeDir="false" afterPath="$PROJECT_DIR$/build/libstructsLib.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libengineLib.a" beforeDir="false" afterPath="$PROJECT_DIR$/build/libengineLib.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Engine/drawFunctions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/drawFunctions.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generator/generator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generator/generator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Structs/structs.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Structs/structs.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Structs/structs.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Structs/structs.hpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +120,7 @@
       <workItem from="1646953231851" duration="4117000" />
       <workItem from="1647016298250" duration="38000" />
       <workItem from="1647037415896" duration="1677000" />
+      <workItem from="1647046332817" duration="1287000" />
     </task>
     <servers />
   </component>
@@ -162,9 +160,9 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="878" height="275" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1646957349770" />
-    <state x="652" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1647037415544">
+    <state x="652" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1647046333086">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="652" y="381" key="com.intellij.ide.util.TipDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1647037415544" />
+    <state x="652" y="381" key="com.intellij.ide.util.TipDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1647046333086" />
   </component>
 </project>

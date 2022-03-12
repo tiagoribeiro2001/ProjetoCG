@@ -3,15 +3,39 @@
 
 #include <iostream>
 #include <map>
+#include <cmath>
 
 using namespace draw;
 using namespace std;
 using namespace structs;
 
+cameraPolar camPol = {0,0,0};
 cameraSettings cam = {0,0,0,0,0,0,0,0,0,0,0,0};
 map<int, figure> figurasMap;
 int ativarFig = 0; //Vai buscar a chave/identificador da figura para desenha-la após obter permissão
 
+double getDistance (int x, int y, int z) {
+    return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+}
+
+double getBeta(int y) {
+    return asin(y/camPol.distance);
+}
+
+double getAlpha(int x) {
+    return asin((x/camPol.distance) * cos(camPol.beta));
+}
+
+double polarX (cameraPolar post) {
+    return post.distance * cos(post.beta) * sin(post.alpha);
+}
+double polarY(cameraPolar post) {
+    return post.distance * sin(post.beta);
+}
+
+double polarZ(cameraPolar post) {
+    return post.distance * cos(post.beta) * cos(post.alpha);
+}
 
 void changeSize(int w, int h)
 {
@@ -41,7 +65,7 @@ void renderScene(void){
 
     // set camera
     glLoadIdentity();
-    gluLookAt(cam.settings[0], cam.settings[1], cam.settings[2],
+    gluLookAt(polarX(camPol), polarY(camPol), polarZ(camPol),
               cam.settings[3], cam.settings[4], cam.settings[5],
               cam.settings[6], cam.settings[7], cam.settings[8]);
 
@@ -77,6 +101,11 @@ int lerFicheiroXML(std::string xml) {
 
             for (; attribute != NULL; attribute = attribute->Next(), i++) {
                 cam.settings[i] = std::stof(attribute->Value());
+                if (i == 2) { //Já temos o x,y,z -> Convertemos para coordenadas polares e guardamos.
+                    camPol.distance = getDistance(cam.settings[0], cam.settings[1], cam.settings[2]); //Obtemos a distancia da camara
+                    camPol.beta = getBeta(cam.settings[1]);
+                    camPol.alpha = getAlpha(cam.settings[0]);
+                }
             }
         }
 
@@ -133,25 +162,54 @@ int lerFicheiroXML(std::string xml) {
     return 0;
 }
 
-void nextFigureKey (unsigned char key, int x, int y){
+void keyboardFunc (unsigned char key, int x, int y){
 
     switch (key) {
         case 'd':
-            if(ativarFig<(figurasMap.size()-1)){
+            if(ativarFig < (figurasMap.size() - 1)){
                 ativarFig++;
-                renderScene();
+                glutPostRedisplay();
             }
             break;
         case 'a':
-            if(ativarFig>0){
+            if(ativarFig > 0){
                 ativarFig--;
-                renderScene();
+                glutPostRedisplay();
             }
+            break;
+        case '+':
+            camPol.distance -= 1;
+            glutPostRedisplay();
+            break;
+        case '-':
+            camPol.distance += 1;
+            glutPostRedisplay();
             break;
         default:
             break;
     }
     //renderScene(); para mudar de cor :)
+}
+
+void processSpecialKeys(int key, int xx, int yy) {
+    switch (key) {
+        case GLUT_KEY_UP:
+            camPol.beta += M_PI/16;
+            glutPostRedisplay();
+            break;
+        case GLUT_KEY_DOWN:
+            camPol.beta -= M_PI/16;
+            glutPostRedisplay();
+            break;
+        case GLUT_KEY_LEFT:
+            camPol.alpha -= M_PI/16;
+            glutPostRedisplay();
+            break;
+        case GLUT_KEY_RIGHT:
+            camPol.alpha += M_PI/16;
+            glutPostRedisplay();
+            break;
+    }
 }
 
 int main(int argc, char** argv){
@@ -170,18 +228,20 @@ int main(int argc, char** argv){
             glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
             glutInitWindowPosition(100, 100);
             glutInitWindowSize(800, 800);
-            glutCreateWindow("Projeto-CG");
+            glutCreateWindow("Graphical primitives");
 
             // put callback registry here
             glutDisplayFunc(renderScene);
             glutReshapeFunc(changeSize);
 
-            glutKeyboardFunc(nextFigureKey);
+            glutKeyboardFunc(keyboardFunc);
+            glutSpecialFunc(processSpecialKeys);
 
             // some OpenGL settings
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_CULL_FACE);
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
             // enter GLUT�s main cycle
             glutMainLoop();

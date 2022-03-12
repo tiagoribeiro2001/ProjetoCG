@@ -18,6 +18,12 @@ namespace structs{
         float settings[12];
     };
 
+    struct cameraPolar {
+        double distance;
+        double alpha;
+        double beta;
+    };
+
     class figure {
 
     public:
