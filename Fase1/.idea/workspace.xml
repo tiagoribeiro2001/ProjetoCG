@@ -16,17 +16,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/src/Engine/engine.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/engine.dir/src/Engine/engine.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/generator.dir/src/Generator/generator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/generator.dir/src/Generator/generator.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/engine" beforeDir="false" afterPath="$PROJECT_DIR$/build/engine" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/generator" beforeDir="false" afterPath="$PROJECT_DIR$/build/generator" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/drawFunctions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/drawFunctions.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Engine/engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generator/generator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generator/generator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Generator/vertices.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Generator/vertices.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +115,7 @@
       <workItem from="1647102935455" duration="11669000" />
       <workItem from="1647117879792" duration="601000" />
       <workItem from="1647126960489" duration="4355000" />
-      <workItem from="1647173582714" duration="1592000" />
+      <workItem from="1647173582714" duration="2242000" />
     </task>
     <servers />
   </component>
