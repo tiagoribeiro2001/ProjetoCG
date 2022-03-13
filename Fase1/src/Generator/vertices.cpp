@@ -1,4 +1,3 @@
-#define _USE_MATH_DEFINES
 #include <cmath>
 #include "vertices.hpp"
 
@@ -168,17 +167,20 @@ figure generate::createCone(float radius, float height, int slices, int stacks) 
         float atualTheta = i * delta;
         float nextTheta = (i + 1) * delta;
 
+        // Desenha base
         f.addPoint(0, 0, 0);
         f.addPoint(radius * sin(nextTheta), 0, radius * cos(nextTheta));
         f.addPoint(radius * sin(atualTheta), 0, cos(atualTheta));
 
         for (int j = 0; j < stacks; j++) {
 
+            // Desenha as faces laterais
             float atualRad = (stacks - j) * raio;
             float nextRad = (stacks - j - 1) * raio;
             float atualAlt = j * alturas;
             float nextAlt = (j + 1) * alturas;
 
+            // Na ultima stack so desenha um triangulo
             if (j != (stacks - 1)) {
                 f.addPoint(nextRad * sin(nextTheta), nextAlt, nextRad * cos(nextTheta));
                 f.addPoint(nextRad * sin(atualTheta), nextAlt, nextRad * cos(atualTheta));

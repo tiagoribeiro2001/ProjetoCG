@@ -3,7 +3,7 @@
 
 using namespace structs;
 
-// cria um ponto com as dadas coordenadas, e adiciona-o à lista de pontos da figura
+// Cria um ponto dadas as coordenadas
 void figure::addPoint(float a, float b, float c) {
     point p;
     p.x = a;

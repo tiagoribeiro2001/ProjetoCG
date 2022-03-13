@@ -73,7 +73,7 @@ void renderScene(void){
     drawReferencial();
     auto pos = figurasMap.find(ativarFig);
     if (pos == figurasMap.end()) {
-        cout << "Não existem mais figuras." << endl;
+        cout << "ERROR: No more figures." << endl;
         glutDestroyWindow(0);
     } else {
         figure value = pos->second;
@@ -150,13 +150,13 @@ int lerFicheiroXML(std::string xml) {
                 j++;
             }
             else {
-                std::cout << "Can't open file:" + fileName << std::endl;
+                std::cout << "ERROR: Can't open .3d file:" + fileName << std::endl;
                 return -1;
             }
         }
     }
     else{
-        std::cout <<"File does not exist!\n" << std::endl;
+        std::cout <<"ERROR: XML file does not exist.\n" << std::endl;
         return -1;
     }
     return 0;
@@ -214,13 +214,13 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 int main(int argc, char** argv){
     if (argc <=1) {
-        std::cout << "\nMissing arguments\n" << std::endl;
+        std::cout << "\nERROR: Missing arguments.\n" << std::endl;
     }
     else if(argc > 2){
-        std::cout << "\nToo many arguments\n" << std::endl;
+        std::cout << "\nERROR: Too many arguments\n" << std::endl;
     }
     else {
-        std::cout << "\nReading .... ..... ....\n" << std::endl;
+        std::cout << "\nReading...\n" << std::endl;
         if(lerFicheiroXML(argv[1])==0) {
 
             // put GLUT init here

@@ -1,13 +1,14 @@
 #include "drawFunctions.hpp"
 
-// funçao auxiliar que desenha triangulos
+// Desenha um triângulo dado 3 pontos
 void drawTriangle(point p1, point p2, point p3) {
 
     glBegin(GL_TRIANGLES);
 
+    // Cor branca
     glColor3ub(255, 255, 255);
 
-    //desenhar os 3 vertices do triangulo
+    // Desenha o triângulo
     glVertex3f(p1.x, p1.y, p1.z);
     glVertex3f(p2.x, p2.y, p2.z);
     glVertex3f(p3.x, p3.y, p3.z);
@@ -16,12 +17,12 @@ void drawTriangle(point p1, point p2, point p3) {
 }
 
 
-// recebe a lista de pontos, e o n�mero de pontos contidos na lista
+// Desenha a figura a partir da struct figure
 void draw::drawFigure(figure f) {
     int i;
     int n = f.pontos.size();
     for (i = 0; i+2 <= n; i+=3) {
-        //desenha os triangulos partindo da lista de pontos da figura
+        // Pega em 3 pontos e desenha um triângulo
         drawTriangle(f.pontos[i], f.pontos[i + 1], f.pontos[i + 2]);
     }
 }
@@ -30,17 +31,17 @@ void draw::drawReferencial() {
     // Desenhar referencial
     glBegin(GL_LINES);
 
-    // X axis in red
+    // Eixo dos xx em vermelho
     glColor3f(1.0f, 0.0f, 0.0f);
     glVertex3f(-100.0f, 0.0f, 0.0f);
     glVertex3f(100.0f, 0.0f, 0.0f);
 
-    // Y Axis in Green
+    // Eixo dos yy em verde
     glColor3f(0.0f, 1.0f, 0.0f);
     glVertex3f(0.0f, -100.0f, 0.0f);
     glVertex3f(0.0f, 100.0f, 0.0f);
 
-    // Z Axis in Blue
+    // Eixo dos zz em azul
     glColor3f(0.0f, 0.0f, 1.0f);
     glVertex3f(0.0f, 0.0f, -100.0f);
     glVertex3f(0.0f, 0.0f, 100.0f);
