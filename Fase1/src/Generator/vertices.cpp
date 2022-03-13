@@ -115,35 +115,41 @@ figure generate::createBox(float units, float divs) {
 figure generate::createSphere(float radius, int slices, int stacks) {
     figure f;
 
-    float alpha = (2 * M_PI) / slices;
-    float beta = (M_PI) / stacks;
+    float theta = (2 * M_PI) / slices;
+    float phi = (M_PI) / stacks;
 
     for (int i = 0; i < slices; i++) {
         for (int j = 0; j < stacks / 2; j++) {
 
-            float atualAlpha = i * alpha;
-            float atualBeta = j * beta;
-            float nextAlpha = (i + 1) * alpha;
-            float nextBeta = (j + 1) * beta;
+            float atualTheta = i * theta;
+            float atualPhi = j * phi;
+            float nextTheta = (i + 1) * theta;
+            float nextPhi = (j + 1) * phi;
+
+            // Na parte superior e inferior da esfera (na ultima e primeira stack) apenas desenhamos um triangulo
+            if (j != (stacks / 2) - 1) {
+
+                // Parte de cima da esfera
+                f.addPoint(radius * cos(atualPhi) * sin(atualTheta), radius * sin(atualPhi), radius * cos(atualPhi) * cos(atualTheta));
+                f.addPoint(radius * cos(nextPhi) * sin(nextTheta), radius * sin(nextPhi), radius * cos(nextPhi) * cos(nextTheta));
+                f.addPoint(radius * cos(nextPhi) * sin(atualTheta), radius * sin(nextPhi), radius * cos(nextPhi) * cos(atualTheta));
+
+                // Parte de baixo da esfera
+                f.addPoint(radius * cos(-nextPhi) * sin(atualTheta), radius * sin(-nextPhi), radius * cos(-nextPhi) * cos(atualTheta));
+                f.addPoint(radius * cos(-nextPhi) * sin(nextTheta), radius * sin(-nextPhi), radius * cos(-nextPhi) * cos(nextTheta));
+                f.addPoint(radius * cos(-atualPhi) * sin(nextTheta), radius * sin(-atualPhi), radius * cos(-atualPhi) * cos(nextTheta));
+
+            }
 
             // Parte de cima da esfera
-            f.addPoint(radius * cos(atualBeta) * sin(atualAlpha), radius * sin(atualBeta), radius * cos(atualBeta) * cos(atualAlpha));
-            f.addPoint(radius * cos(nextBeta) * sin(nextAlpha), radius * sin(nextBeta), radius * cos(nextBeta) * cos(nextAlpha));
-            f.addPoint(radius * cos(nextBeta) * sin(atualAlpha), radius * sin(nextBeta), radius * cos(nextBeta) * cos(atualAlpha));
-
-            f.addPoint(radius * cos(nextBeta) * sin(nextAlpha), radius * sin(nextBeta), radius * cos(nextBeta) * cos(nextAlpha));
-            f.addPoint(radius * cos(atualBeta) * sin(atualAlpha), radius * sin(atualBeta), radius * cos(atualBeta) * cos(atualAlpha));
-            f.addPoint(radius * cos(atualBeta) * sin(nextAlpha), radius * sin(atualBeta), radius * cos(atualBeta) * cos(nextAlpha));
-
+            f.addPoint(radius * cos(nextPhi) * sin(nextTheta), radius * sin(nextPhi), radius * cos(nextPhi) * cos(nextTheta));
+            f.addPoint(radius * cos(atualPhi) * sin(atualTheta), radius * sin(atualPhi), radius * cos(atualPhi) * cos(atualTheta));
+            f.addPoint(radius * cos(atualPhi) * sin(nextTheta), radius * sin(atualPhi), radius * cos(atualPhi) * cos(nextTheta));
 
             // Parte de baixo da esfera
-            f.addPoint(radius * cos(-atualBeta) * sin(nextAlpha), radius * sin(-atualBeta), radius * cos(-atualBeta) * cos(nextAlpha));
-            f.addPoint(radius * cos(-atualBeta) * sin(atualAlpha), radius * sin(-atualBeta), radius * cos(-atualBeta) * cos(atualAlpha));
-            f.addPoint(radius * cos(-nextBeta) * sin(atualAlpha), radius * sin(-nextBeta), radius * cos(-nextBeta) * cos(atualAlpha));
-
-            f.addPoint(radius * cos(-nextBeta) * sin(atualAlpha), radius * sin(-nextBeta), radius * cos(-nextBeta) * cos(atualAlpha));
-            f.addPoint(radius * cos(-nextBeta) * sin(nextAlpha), radius * sin(-nextBeta), radius * cos(-nextBeta) * cos(nextAlpha));
-            f.addPoint(radius * cos(-atualBeta) * sin(nextAlpha), radius * sin(-atualBeta), radius * cos(-atualBeta) * cos(nextAlpha));
+            f.addPoint(radius * cos(-atualPhi) * sin(nextTheta), radius * sin(-atualPhi), radius * cos(-atualPhi) * cos(nextTheta));
+            f.addPoint(radius * cos(-atualPhi) * sin(atualTheta), radius * sin(-atualPhi), radius * cos(-atualPhi) * cos(atualTheta));
+            f.addPoint(radius * cos(-nextPhi) * sin(atualTheta), radius * sin(-nextPhi), radius * cos(-nextPhi) * cos(atualTheta));
 
         }
     }
@@ -153,57 +159,36 @@ figure generate::createSphere(float radius, int slices, int stacks) {
 figure generate::createCone(float radius, float height, int slices, int stacks) {
     figure f;
 
-    float theta = 0;
-    float nextTheta = 0;
     float delta = (2 * M_PI) / slices;
     float raio = radius / stacks;
     float alturas = height / stacks;
-    int i, j;
 
-    //fazer a circunferência da base
-    for (i = 0; i < slices; i++) {
+    for (int i = 0; i < slices; i++) {
 
-        nextTheta = theta + delta;
+        float atualTheta = i * delta;
+        float nextTheta = (i + 1) * delta;
 
         f.addPoint(0, 0, 0);
         f.addPoint(radius * sin(nextTheta), 0, radius * cos(nextTheta));
-        f.addPoint(radius * sin(theta), 0, cos(theta));
+        f.addPoint(radius * sin(atualTheta), 0, cos(atualTheta));
 
-        theta = nextTheta;
-    }
+        for (int j = 0; j < stacks; j++) {
 
-    // Fazer as laterais
-    float r1 = radius;
-    float r2 = radius - raio;
-    float alt1 = 0;
-    float alt2 = alturas;
-    theta = 0;
-    nextTheta = 0;
+            float atualRad = (stacks - j) * raio;
+            float nextRad = (stacks - j - 1) * raio;
+            float atualAlt = j * alturas;
+            float nextAlt = (j + 1) * alturas;
 
-    for (i = 0; i < slices; i++) {
+            if (j != (stacks - 1)) {
+                f.addPoint(nextRad * sin(nextTheta), nextAlt, nextRad * cos(nextTheta));
+                f.addPoint(nextRad * sin(atualTheta), nextAlt, nextRad * cos(atualTheta));
+                f.addPoint(atualRad * sin(atualTheta), atualAlt, atualRad * cos(atualTheta));
+            }
 
-        nextTheta += delta;
-
-        for (j = 0; j < stacks; j++) {
-
-            f.addPoint(r1 * sin(nextTheta), alt1, r1 * cos(nextTheta));
-            f.addPoint(r2 * sin(nextTheta), alt2, r2 * cos(nextTheta));
-            f.addPoint(r1 * sin(theta), alt1, r1 * cos(theta));
-
-            f.addPoint(r2 * sin(nextTheta), alt2, r2 * cos(nextTheta));
-            f.addPoint(r2 * sin(theta), alt2, r2 * cos(theta));
-            f.addPoint(r1 * sin(theta), alt1, r1 * cos(theta));
-
-            r1 -= raio;
-            r2 -= raio;
-            alt1 += alturas;
-            alt2 += alturas;
+            f.addPoint(atualRad * sin(nextTheta), atualAlt, atualRad * cos(nextTheta));
+            f.addPoint(nextRad * sin(nextTheta), nextAlt, nextRad * cos(nextTheta));
+            f.addPoint(atualRad * sin(atualTheta), atualAlt, atualRad * cos(atualTheta));
         }
-        r1 = radius;
-        r2 = radius - raio;
-        alt1 = 0;
-        alt2 = alturas;
-        theta = nextTheta;
     }
     return f;
 }
