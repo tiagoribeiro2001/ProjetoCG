@@ -5,8 +5,8 @@
       <config projectName="Fase1" targetName="structsLib" />
       <config projectName="Fase1" targetName="Lib" />
       <config projectName="Fase1" targetName="engineLib" />
-      <config projectName="Fase1" targetName="engine" />
       <config projectName="Fase1" targetName="generatorLib" />
+      <config projectName="Fase1" targetName="engine" />
       <config projectName="Fase1" targetName="generator" />
     </generated>
   </component>
@@ -16,7 +16,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="" />
+    <list default="true" id="ad1c7670-8693-41a0-80df-52555a3d1ccc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,6 +118,7 @@
       <workItem from="1647117879792" duration="601000" />
       <workItem from="1647126960489" duration="4355000" />
       <workItem from="1647173582714" duration="2242000" />
+      <workItem from="1647354339539" duration="24000" />
     </task>
     <servers />
   </component>
@@ -155,10 +158,10 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="878" height="275" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1646957349770" />
-    <state x="652" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1647173784959">
+    <state x="652" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1647354359585">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="652" y="381" key="com.intellij.ide.util.TipDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1647173784959" />
+    <state x="652" y="381" key="com.intellij.ide.util.TipDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1647354359585" />
     <state x="740" y="197" width="501" height="720" key="refactoring.ChangeSignatureDialog" timestamp="1647115952776">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
