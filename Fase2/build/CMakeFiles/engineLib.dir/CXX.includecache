@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Engine/drawFunctions.cpp
+drawFunctions.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Engine/drawFunctions.hpp
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Engine/drawFunctions.hpp
+../Structs/structs.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+GLUT/glut.h
+-
+GL/glut.h
+-
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+cstdio
+-
+cstdlib
+-
+vector
+-
+string
+-
+iostream
+-
+fstream
+-
+sstream
+-
+

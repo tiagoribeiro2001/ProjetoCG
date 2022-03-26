@@ -1,0 +1,70 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Engine/drawFunctions.hpp
+../Structs/structs.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+GLUT/glut.h
+-
+GL/glut.h
+-
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Engine/engine.cpp
+drawFunctions.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Engine/drawFunctions.hpp
+../tinyXML/tinyxml.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+iostream
+-
+map
+-
+cmath
+-
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+cstdio
+-
+cstdlib
+-
+vector
+-
+string
+-
+iostream
+-
+fstream
+-
+sstream
+-
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.h
+assert.h
+-
+string.h
+-
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+ctype.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+string
+-
+iostream
+-
+sstream
+-
+tinystr.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.h
+

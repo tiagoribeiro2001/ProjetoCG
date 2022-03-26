@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgeneratorLib.a  CMakeFiles/generatorLib.dir/src/Generator/vertices.cpp.o
+/usr/bin/ranlib libgeneratorLib.a
