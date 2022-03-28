@@ -146,11 +146,11 @@ group parseGroupXML(TiXmlElement* gr, group g){
     float x, y, z, angle;
 
     //Anda por cada elemento filho do <group>
-    for (TiXmlElement* elem = gr->FirstChild()->ToElement(); elem!=nullptr;elem = elem->NextSiblingElement()){
+    for (TiXmlElement* elem = gr->FirstChildElement(); elem!=nullptr;elem = elem->NextSiblingElement()){
         //Caso o filho seja <transform>
         if(strcmp(elem->Value(),"transform")==0) {
             transform t{};
-            TiXmlElement* transChild = elem->FirstChild()->ToElement();
+            TiXmlElement* transChild = elem->FirstChildElement();
             while (transChild) {
                 if (strcmp(transChild->Value(), "translate") == 0) {
                     x = atof(transChild->Attribute("x"));
