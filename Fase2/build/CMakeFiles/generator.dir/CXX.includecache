@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Generator/generator.cpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Generator/generator.cpp
 ../tinyXML/tinyxml.h
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxml.h
 vertices.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Generator/vertices.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Generator/vertices.hpp
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Generator/vertices.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Generator/vertices.hpp
 ../Structs/structs.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Structs/structs.hpp
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Structs/structs.hpp
 cstdio
 -
 cstdlib
@@ -32,13 +32,13 @@ fstream
 sstream
 -
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinystr.h
 assert.h
 -
 string.h
 -
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxml.h
 ctype.h
 -
 stdio.h
@@ -56,5 +56,5 @@ iostream
 sstream
 -
 tinystr.h
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinystr.h
 

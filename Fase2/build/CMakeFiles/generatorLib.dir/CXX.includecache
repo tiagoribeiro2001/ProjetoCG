@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Generator/vertices.cpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Generator/vertices.cpp
 cmath
 -
 vertices.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Generator/vertices.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Generator/vertices.hpp
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Generator/vertices.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Generator/vertices.hpp
 ../Structs/structs.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Structs/structs.hpp
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/Structs/structs.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/Structs/structs.hpp
 cstdio
 -
 cstdlib

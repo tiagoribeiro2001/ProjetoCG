@@ -1,2 +1,0 @@
-/usr/bin/ar qc libstructsLib.a  CMakeFiles/structsLib.dir/src/Structs/structs.cpp.o
-/usr/bin/ranlib libstructsLib.a

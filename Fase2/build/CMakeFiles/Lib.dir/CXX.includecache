@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.cpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinystr.cpp
 tinystr.h
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinystr.h
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinystr.h
 assert.h
 -
 string.h
 -
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.cpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxml.cpp
 ctype.h
 -
 sstream
@@ -24,9 +24,9 @@ sstream
 iostream
 -
 tinyxml.h
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxml.h
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxml.h
 ctype.h
 -
 stdio.h
@@ -44,19 +44,19 @@ iostream
 sstream
 -
 tinystr.h
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinystr.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinystr.h
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxmlerror.cpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxmlerror.cpp
 tinyxml.h
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxml.h
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxmlparser.cpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxmlparser.cpp
 ctype.h
 -
 stddef.h
 -
 tinyxml.h
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase1/src/tinyXML/tinyxml.h
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase2/src/tinyXML/tinyxml.h
 windows.h
 -
 

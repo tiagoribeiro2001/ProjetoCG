@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/generator.dir/src/Generator/generator.cpp.o  -o generator  libgeneratorLib.a libLib.a libstructsLib.a 

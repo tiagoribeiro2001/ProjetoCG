@@ -3,16 +3,17 @@
 
 #include <iostream>
 #include <map>
+#include <list>
 #include <cmath>
 
 using namespace draw;
 using namespace std;
 using namespace structs;
 
+group grupo;
+
 cameraPolar camPol = {0,0,0};
 cameraSettings cam = {0,0,0,0,0,0,0,0,0,0,0,0};
-map<int, figure> figurasMap;
-int ativarFig = 0; //Vai buscar a chave/identificador da figura para desenha-la após obter permissão
 
 double getDistance (int x, int y, int z) {
     return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
@@ -98,19 +99,148 @@ void renderScene(void){
 
 
     drawReferencial();
-    auto pos = figurasMap.find(ativarFig);
-    if (pos == figurasMap.end()) {
-        cout << "ERROR: No more figures." << endl;
-        glutDestroyWindow(0);
-    } else {
-        figure value = pos->second;
-        drawFigure(value);
-    }
+
+    drawFigures(grupo);
 
     // End of frame
     glutSwapBuffers();
 }
 
+group lerFicheiro3D(string fileName, group g) {
+    ifstream file;
+    file.open(fileName);
+    if (file.is_open()) {
+
+        figure figura;
+        string line;
+        float x1, y1, z1 = 0.0f;
+
+        while (getline(file, line)) {
+            float cood[3];
+
+            std::string delimiter = " ";
+            size_t pos = 0;
+            std::string token;
+            int i = 0;
+            while ((pos = line.find(delimiter)) != std::string::npos) {
+                token = line.substr(0, pos);
+                cood[i] = std::stof(token);
+                i++;
+                line.erase(0, pos + delimiter.length());
+            }
+            x1=cood[0],y1=cood[1],z1=cood[2];
+            figura.addPoint(x1,y1,z1);
+        }
+        g.addFigure(figura);
+        file.close();
+    }
+
+    else{
+        std::cout << "ERROR: Can't open .3d file:" + fileName << std::endl;
+    }
+
+    return g;
+}
+
+group parseGroupXML(TiXmlElement* gr, group g){
+    float x, y, z, angle;
+
+    //Anda por cada elemento filho do <group>
+    for (TiXmlElement* elem = gr->FirstChild()->ToElement(); elem!=nullptr;elem = elem->NextSiblingElement()){
+        //Caso o filho seja <transform>
+        if(strcmp(elem->Value(),"transform")==0) {
+            transform t{};
+            TiXmlElement* transChild = elem->FirstChild()->ToElement();
+            while (transChild) {
+                if (strcmp(transChild->Value(), "translate") == 0) {
+                    x = atof(transChild->Attribute("x"));
+                    y = atof(transChild->Attribute("y"));
+                    z = atof(transChild->Attribute("z"));
+
+                    t.setTransform(x, y, z, 0, transformation::translate);
+                    g.addTransform(t);
+                } else if (strcmp(transChild->Value(), "rotate") == 0) {
+                    angle = atof(transChild->Attribute("angle"));
+                    x = atof(transChild->Attribute("x"));
+                    y = atof(transChild->Attribute("y"));
+                    z = atof(transChild->Attribute("z"));
+
+                    t.setTransform(x, y, z, angle, transformation::rotate);
+                    g.addTransform(t);
+                } else if (strcmp(transChild->Value(), "scale") == 0) {
+                    x = atof(transChild->Attribute("x"));
+                    y = atof(transChild->Attribute("y"));
+                    z = atof(transChild->Attribute("z"));
+
+                    t.setTransform(x, y, z, 0, transformation::scale);
+                    g.addTransform(t);
+                } else if (strcmp(transChild->Value(), "color") == 0) {
+                    x = atof(transChild->Attribute("r"));
+                    y = atof(transChild->Attribute("g"));
+                    z = atof(transChild->Attribute("b"));
+
+                    t.setTransform(x, y, z, 0, transformation::color);
+                    g.addTransform(t);
+                }
+                transChild = transChild->NextSiblingElement();
+            }
+        }
+        else if (strcmp(elem->Value(), "models") == 0) {
+            TiXmlElement *model = elem->FirstChildElement("model");
+
+            while (model) {
+                const char *ficheiro = model->Attribute("file");
+
+                //Abre o ficheiro .3d
+                g = lerFicheiro3D(ficheiro, g);
+
+                //next sibling
+                model = model->NextSiblingElement("model");
+            }
+        }
+        else if (strcmp(elem->Value(), "group") == 0){ //caso encontre uma tag de grupo dentro deste grupo
+            group childGr;
+            childGr = parseGroupXML(elem, childGr);
+            g.addGroup(childGr);
+        }
+    }
+    return g;
+}
+
+int lerFicheiroXML(std::string xml){
+    TiXmlDocument fich;
+    //Load do ficheiro XML com o nome que foi passado como argumento
+    if (fich.LoadFile(xml.c_str())) {
+        TiXmlElement* worldElement =  fich.RootElement();
+        TiXmlElement* cameraElement = worldElement->FirstChildElement();
+        TiXmlElement* cameraChild = cameraElement->FirstChildElement();
+        int i = 0;
+
+        for (; cameraChild!= NULL; cameraChild = cameraChild->NextSiblingElement()) {
+            TiXmlAttribute * attribute = cameraChild->FirstAttribute();
+
+            for (; attribute != NULL; attribute = attribute->Next(), i++) {
+                cam.settings[i] = std::stof(attribute->Value());
+                if (i == 2) { //Já temos o x,y,z -> Convertemos para coordenadas polares e guardamos.
+                    camPol.distance = getDistance(cam.settings[0], cam.settings[1], cam.settings[2]); //Obtemos a distancia da camara
+                    camPol.beta = getBeta(cam.settings[1]);
+                    camPol.alpha = getAlpha(cam.settings[0]);
+                }
+            }
+        }
+
+        // Lê os ficheiros a desenhar
+        TiXmlElement* groupElement = cameraElement->NextSiblingElement();
+        grupo = parseGroupXML(groupElement, grupo);
+    }
+    else{
+        std::cout <<"File does not exist!\n" << std::endl;
+        return -1;
+    }
+    return 0;
+}
+
+/*
 int lerFicheiroXML(std::string xml) {
     TiXmlDocument fich;
     //Load do ficheiro XML com o nome que foi passado como argumento
@@ -187,23 +317,11 @@ int lerFicheiroXML(std::string xml) {
         return -1;
     }
     return 0;
-}
+}*/
 
 void keyboardFunc (unsigned char key, int x, int y){
 
     switch (key) {
-        case 'd':
-            if(ativarFig < (figurasMap.size() - 1)){
-                ativarFig++;
-                glutPostRedisplay();
-            }
-            break;
-        case 'a':
-            if(ativarFig > 0){
-                ativarFig--;
-                glutPostRedisplay();
-            }
-            break;
         case '+':
             camPol.distance -= 1;
             glutPostRedisplay();
@@ -255,7 +373,7 @@ int main(int argc, char** argv){
             glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
             glutInitWindowPosition(100, 100);
             glutInitWindowSize(800, 800);
-            glutCreateWindow("Graphical primitives G07");
+            glutCreateWindow("Geometric Transforms  G07");
 
             // put callback registry here
             glutDisplayFunc(renderScene);
@@ -268,7 +386,6 @@ int main(int argc, char** argv){
             glEnable(GL_DEPTH_TEST);
             glEnable(GL_CULL_FACE);
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-            glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 
             // enter GLUT�s main cycle
             glutMainLoop();

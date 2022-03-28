@@ -1,2 +1,0 @@
-/usr/bin/ar qc libengineLib.a  CMakeFiles/engineLib.dir/src/Engine/drawFunctions.cpp.o
-/usr/bin/ranlib libengineLib.a
