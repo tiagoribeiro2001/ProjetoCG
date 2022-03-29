@@ -18,8 +18,9 @@
         <group>
             <!--Mercúrio-->
             <transform>
-                <translate x="1.04" y="0" z="1.7" />
-                <scale x="0.05" y="0.05" z="0.05" />
+                <rotate angle="321" x="0" y="1" z="0" />
+                <translate x="1.5" y="0" z="0" />
+                <scale x="0.10" y="0.10" z="0.10" />
                 <color r="0.6" g="0.6" b="0.6" />
             </transform>
             <models>
@@ -29,7 +30,8 @@
         <group>
             <!--Vénus-->
             <transform>
-                <translate x="2.16" y="0" z="-3.37" />
+                <rotate angle="123" x="0" y="1" z="0" />
+                <translate x="2.5" y="0" z="0" />
                 <scale x="0.15" y="0.15" z="0.15" />
                 <color r="0.85" g="0.85" b="0.85" />
             </transform>
@@ -40,7 +42,8 @@
         <group>
             <!--Terra-->
             <transform>
-                <translate x="6" y="0" z="0" />
+                <rotate angle="32" x="0" y="1" z="0" />
+                <translate x="3.5" y="0" z="0" />
                 <scale x="0.20" y="0.20" z="0.20" />
                 <color r="0.05" g="0.40" b="0.60" />
             </transform>
@@ -51,7 +54,8 @@
         <group>
             <!--Marte-->
             <transform>
-                <translate x="-7.56" y="0.3" z="2.62" />
+                <rotate angle="67" x="0" y="1" z="0" />
+                <translate x="4.5" y="0" z="0" />
                 <scale x="0.10" y="0.10" z="0.10" />
                 <color r="0.60" g="0.30" b="0.05" />
             </transform>
@@ -62,9 +66,46 @@
         <group>
             <!--Júpiter-->
             <transform>
-                <translate x="-6.60" y="0.3" z="-10.02" />
+                <rotate angle="189" x="0" y="1" z="0" />
+                <translate x="7.5" y="0" z="0" />
                 <scale x="0.60" y="0.60" z="0.60" />
                 <color r="0.90" g="0.80" b="0.75" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <group>
+            <!--Saturno-->
+            <transform>
+                <rotate angle="50" x="0" y="1" z="0.01" />
+                <translate x="9.5" y="0" z="0" />
+                <scale x="0.50" y="0.50" z="0.50" />
+                <color r="0.68" g="0.75" b="0.70" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <group>
+            <!--Urano-->
+            <transform>
+                <rotate angle="103" x="0" y="1" z="-0.02" />
+                <translate x="11" y="0" z="0" />
+                <scale x="0.35" y="0.35" z="0.35" />
+                <color r="0.17" g="0.51" b="0.64" />
+            </transform>
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <group>
+            <!--Neptuno-->
+            <transform>
+                <rotate angle="280" x="0" y="1" z="0.03" />
+                <translate x="12.5" y="0" z="0" />
+                <scale x="0.35" y="0.35" z="0.35" />
+                <color r="0" g="0.30" b="0.41" />
             </transform>
             <models>
                 <model file="sphere.3d" />
