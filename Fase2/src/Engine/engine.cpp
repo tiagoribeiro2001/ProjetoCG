@@ -136,7 +136,7 @@ group lerFicheiro3D(string fileName, group g) {
     }
 
     else{
-        std::cout << "ERROR: Can't open .3d file:" + fileName << std::endl;
+        printf("ERROR: Can't open .3d file: %s", fileName.c_str());
     }
 
     return g;
@@ -144,10 +144,10 @@ group lerFicheiro3D(string fileName, group g) {
 
 group parseGroupXML(TiXmlElement* gr, group g){
     float x, y, z, angle;
+    TiXmlElement* elem = gr->FirstChildElement();
 
-    //Anda por cada elemento filho do <group>
-    for (TiXmlElement* elem = gr->FirstChildElement(); elem!=nullptr;elem = elem->NextSiblingElement()){
-        //Caso o filho seja <transform>
+    while (elem){
+
         if(strcmp(elem->Value(),"transform")==0) {
             transform t{};
             TiXmlElement* transChild = elem->FirstChildElement();
@@ -185,31 +185,32 @@ group parseGroupXML(TiXmlElement* gr, group g){
                 transChild = transChild->NextSiblingElement();
             }
         }
+
         else if (strcmp(elem->Value(), "models") == 0) {
             TiXmlElement *model = elem->FirstChildElement("model");
 
+            // Lê todos os ficheiros .3d
             while (model) {
                 const char *ficheiro = model->Attribute("file");
-
-                //Abre o ficheiro .3d
                 g = lerFicheiro3D(ficheiro, g);
-
-                //next sibling
                 model = model->NextSiblingElement("model");
             }
         }
-        else if (strcmp(elem->Value(), "group") == 0){ //caso encontre uma tag de grupo dentro deste grupo
+
+        else if (strcmp(elem->Value(), "group") == 0){
             group childGr;
             childGr = parseGroupXML(elem, childGr);
             g.addGroup(childGr);
         }
+
+        elem = elem->NextSiblingElement();
     }
     return g;
 }
 
+// Função que lê o ficheiro XML com o nome que foi passado como argumento
 int lerFicheiroXML(std::string xml){
     TiXmlDocument fich;
-    //Load do ficheiro XML com o nome que foi passado como argumento
     if (fich.LoadFile(xml.c_str())) {
         TiXmlElement* worldElement =  fich.RootElement();
         TiXmlElement* cameraElement = worldElement->FirstChildElement();
@@ -229,12 +230,12 @@ int lerFicheiroXML(std::string xml){
             }
         }
 
-        // Lê os ficheiros a desenhar
+        //
         TiXmlElement* groupElement = cameraElement->NextSiblingElement();
         grupo = parseGroupXML(groupElement, grupo);
     }
     else{
-        std::cout <<"File does not exist!\n" << std::endl;
+        printf("File does not exist!\n");
         return -1;
     }
     return 0;
@@ -359,13 +360,13 @@ void processSpecialKeys(int key, int xx, int yy) {
 
 int main(int argc, char** argv){
     if (argc <=1) {
-        std::cout << "\nERROR: Missing arguments.\n" << std::endl;
+        printf("\nERROR: Missing arguments.\n");
     }
     else if(argc > 2){
-        std::cout << "\nERROR: Too many arguments\n" << std::endl;
+        printf("\nERROR: Too many arguments\n");
     }
     else {
-        std::cout << "\nReading...\n" << std::endl;
+        printf("\nReading...\n");
         if(lerFicheiroXML(argv[1])==0) {
 
             // put GLUT init here

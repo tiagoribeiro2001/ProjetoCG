@@ -8,4 +8,5 @@ namespace generate{
     figure createBox(float, float);
     figure createSphere(float, int, int);
     figure createCone(float, float, int, int);
+    figure createTorus(float, float, int, int);
 }

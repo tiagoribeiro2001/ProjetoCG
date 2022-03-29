@@ -194,3 +194,29 @@ figure generate::createCone(float radius, float height, int slices, int stacks) 
     }
     return f;
 }
+
+figure generate::createTorus(float radius, float radiusCirc, int slices, int stacks) {
+    figure f;
+
+    float sliceAng = (2 * M_PI) / slices;
+    float stackAng = (2 * M_PI) / stacks;
+
+    for (int i = 0; i < slices; i++) {
+        float alpha = sliceAng * i;
+        float nextAlpha = sliceAng * (i + 1);
+
+        for (int j = 0; j < stacks; j++) {
+            float beta = stackAng * j;
+            float nextBeta = sliceAng * (j + 1);
+
+            f.addPoint((radius + radiusCirc * cos(beta)) * cos(alpha), (radius + radiusCirc * cos(beta)) * sin(alpha), radiusCirc * sin(beta));
+            f.addPoint((radius + radiusCirc * cos(beta)) * cos(nextAlpha), (radius + radiusCirc * cos(beta)) * sin(nextAlpha), radiusCirc * sin(beta));
+            f.addPoint((radius + radiusCirc * cos(nextBeta)) * cos(nextAlpha), (radius + radiusCirc * cos(nextBeta)) * sin(nextAlpha), radiusCirc * sin(nextBeta));
+
+            f.addPoint((radius + radiusCirc * cos(nextBeta)) * cos(nextAlpha), (radius + radiusCirc * cos(nextBeta)) * sin(nextAlpha), radiusCirc * sin(nextBeta));
+            f.addPoint((radius + radiusCirc * cos(nextBeta)) * cos(alpha), (radius + radiusCirc * cos(nextBeta)) * sin(alpha), radiusCirc * sin(nextBeta));
+            f.addPoint((radius + radiusCirc * cos(beta)) * cos(alpha), (radius + radiusCirc * cos(beta)) * sin(alpha), radiusCirc * sin(beta));
+        }
+    }
+    return f;
+}

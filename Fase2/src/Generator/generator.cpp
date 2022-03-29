@@ -17,10 +17,10 @@ int createFile (vector<point> vertices, string name){
     }
 
     if(!file){
-        cout<<"\nERROR: Couldn't create .3d file.\n";
+        printf("\nERROR: Couldn't create .3d file.\n");
         return -1;
     }
-    cout<<".3d file created successfully.\n";
+    printf(".3d file created successfully.\n");
     file.close();
     return 0;
 }
@@ -28,7 +28,9 @@ int createFile (vector<point> vertices, string name){
 int main(int argc, char* argv[]) {
     figure f;
 
-    if(argc<=1) cout << "\nERROR: Missing arguments.\n" << endl;
+    if(argc<=1) {
+        printf("\nERROR: Missing arguments.\n");
+    }
     else {
 
         // Receber os parâmetros e gerar o ficheiro 3d do plane
@@ -40,7 +42,7 @@ int main(int argc, char* argv[]) {
             f = createPlane(units, divs);
 
             if (createFile(f.pontos, argv[4]) == 0) {
-                std::cout << "Done.\n" << std::endl;
+                printf("Done.\n");
             }
 
         }
@@ -53,7 +55,7 @@ int main(int argc, char* argv[]) {
             f = createBox(units, divs);
 
             if (createFile(f.pontos, argv[4]) == 0) {
-                std::cout << "Done.\n" << std::endl;
+                printf("Done.\n");
             }
         }
 
@@ -70,12 +72,12 @@ int main(int argc, char* argv[]) {
             f = createSphere(radius, stacks, slices);
 
             if (createFile(f.pontos, argv[5]) == 0) {
-                std::cout << "Done.\n" << std::endl;
+                printf("Done.\n");
             }
 
         }
 
-            // Receber os parâmetros e gerar o ficheiro 3d do cone
+        // Receber os parâmetros e gerar o ficheiro 3d do cone
         else if ((strcmp(argv[1], "cone") == 0) && (argc == 7)) {
             float radius = std::stof(argv[2]);
             float height = std::stof(argv[3]);
@@ -89,11 +91,30 @@ int main(int argc, char* argv[]) {
             f = createCone(radius, height, slices, stacks);
 
             if (createFile(f.pontos, argv[6]) == 0) {
-                std::cout << "Done.\n" << std::endl;
+                printf("Done.\n");
             }
         }
+
+        // Receber os parâmetros e gerar o ficheiro 3d da torus
+        else if ((strcmp(argv[1], "torus") == 0) && (argc == 7)) {
+            float radiusI = std::stof(argv[2]);
+            float radiusE = std::stof(argv[3]);
+            stringstream aux(argv[4]);
+            int slices = 0;
+            aux >> slices;
+            stringstream aux2(argv[5]);
+            int rings = 0;
+            aux2 >> rings;
+
+            f = createTorus(radiusI, radiusE, slices, rings);
+
+            if (createFile(f.pontos, argv[6]) == 0) {
+                printf("Done.\n");
+            }
+        }
+
         else {
-            std::cout << "\nERROR: Missing arguments.\n" << std::endl;
+            printf("\nERROR: Missing arguments.\n");
         }
     }
 }
