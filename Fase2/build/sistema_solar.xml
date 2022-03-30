@@ -19,8 +19,8 @@
             <!--Mercúrio-->
             <transform>
                 <rotate angle="321" x="0" y="1" z="0" />
-                <translate x="1.5" y="0" z="0" />
-                <scale x="0.10" y="0.10" z="0.10" />
+                <translate x="2.5" y="0" z="0" />
+                <scale x="0.05" y="0.05" z="0.05" />
                 <color r="0.6" g="0.6" b="0.6" />
             </transform>
             <models>
@@ -31,8 +31,8 @@
             <!--Vénus-->
             <transform>
                 <rotate angle="123" x="0" y="1" z="0" />
-                <translate x="2.5" y="0" z="0" />
-                <scale x="0.15" y="0.15" z="0.15" />
+                <translate x="3.5" y="0" z="0" />
+                <scale x="0.07" y="0.07" z="0.07" />
                 <color r="0.85" g="0.85" b="0.85" />
             </transform>
             <models>
@@ -43,20 +43,32 @@
             <!--Terra-->
             <transform>
                 <rotate angle="32" x="0" y="1" z="0" />
-                <translate x="3.5" y="0" z="0" />
-                <scale x="0.20" y="0.20" z="0.20" />
+                <translate x="4.5" y="0" z="0" />
+                <scale x="0.10" y="0.10" z="0.10" />
                 <color r="0.05" g="0.40" b="0.60" />
             </transform>
             <models>
                 <model file="sphere.3d" />
             </models>
+            <group>
+                <!--Lua-->
+                <transform>
+                    <rotate angle="89" x="0" y="1" z="0" />
+                    <translate x="3.5" y="0" z="0" />
+                    <scale x="0.3" y="0.3" z="0.3" />
+                    <color r="0.55" g="0.55" b="0.55" />
+                </transform>
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
         </group>
         <group>
             <!--Marte-->
             <transform>
                 <rotate angle="245" x="0" y="1" z="0" />
-                <translate x="4.5" y="0" z="0" />
-                <scale x="0.10" y="0.10" z="0.10" />
+                <translate x="5.5" y="0" z="0" />
+                <scale x="0.05" y="0.05" z="0.05" />
                 <color r="0.60" g="0.30" b="0.05" />
             </transform>
             <models>
@@ -67,8 +79,8 @@
             <!--Júpiter-->
             <transform>
                 <rotate angle="189" x="0" y="1" z="0" />
-                <translate x="7.5" y="0" z="0" />
-                <scale x="0.60" y="0.60" z="0.60" />
+                <translate x="8.5" y="0" z="0" />
+                <scale x="0.32" y="0.32" z="0.32" />
                 <color r="0.90" g="0.80" b="0.75" />
             </transform>
             <models>
@@ -79,26 +91,15 @@
             <!--Saturno-->
             <transform>
                 <rotate angle="43" x="0" y="1" z="0.01" />
-                <translate x="9.5" y="0" z="0" />
-                <scale x="0.50" y="0.50" z="0.50" />
+                <translate x="10.5" y="0" z="0" />
+                <scale x="0.25" y="0.25" z="0.25" />
                 <color r="0.68" g="0.75" b="0.70" />
             </transform>
             <models>
                 <model file="sphere.3d" />
             </models>
             <group>
-                <!--Aneis de Saturno-->
-                <transform>
-                    <rotate angle="90" x="1" y="0.3" z="0" />
-                    <scale x="0.5" y="0.5" z="0.05" />
-                    <color r="0.58" g="0.53" b="0.40" />
-                </transform>
-                <models>
-                    <model file="torus.3d" />
-                </models>
-            </group>
-            <group>
-                <!--Aneis de Saturno-->
+                <!--Anel de Saturno-->
                 <transform>
                     <rotate angle="90" x="1" y="0.3" z="0" />
                     <scale x="0.77" y="0.77" z="0.05" />
@@ -113,31 +114,20 @@
             <!--Urano-->
             <transform>
                 <rotate angle="103" x="0" y="1" z="-0.02" />
-                <translate x="11" y="0" z="0" />
-                <scale x="0.35" y="0.35" z="0.35" />
+                <translate x="12" y="0" z="0" />
+                <scale x="0.17" y="0.17" z="0.17" />
                 <color r="0.17" g="0.51" b="0.64" />
             </transform>
             <models>
                 <model file="sphere.3d" />
             </models>
-            <group>
-                <!--Aneis de Urano-->
-                <transform>
-                    <rotate angle="98" x="0" y="1" z="0" />
-                    <scale x="0.47" y="0.47" z="0.05" />
-                    <color r="1" g="1" b="1" />
-                </transform>
-                <models>
-                    <model file="torus.3d" />
-                </models>
-            </group>
         </group>
         <group>
             <!--Neptuno-->
             <transform>
                 <rotate angle="314" x="0" y="1" z="0" />
-                <translate x="12.5" y="0" z="0" />
-                <scale x="0.35" y="0.35" z="0.35" />
+                <translate x="13.5" y="0" z="0" />
+                <scale x="0.17" y="0.17" z="0.17" />
                 <color r="0" g="0.30" b="0.41" />
             </transform>
             <models>
