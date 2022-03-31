@@ -98,7 +98,7 @@ void renderScene(void){
               cam.settings[6], cam.settings[7], cam.settings[8]);
 
 
-    drawReferencial();
+    // drawReferencial();
 
     drawFigures(grupo);
 
