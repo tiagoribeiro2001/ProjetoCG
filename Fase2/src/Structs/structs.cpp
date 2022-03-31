@@ -5,19 +5,11 @@ using namespace structs;
 
 // Cria um ponto dadas as coordenadas
 void figure::addPoint(float a, float b, float c) {
-    point p;
+    point p{};
     p.x = a;
     p.y = b;
     p.z = c;
     pontos.push_back(p);
-}
-
-void transform::setTransform() {
-    x = 0;
-    y = 0;
-    z = 0;
-    ang = 0;
-    trans = transformation::none;
 }
 
 void transform::setTransform(float xx, float yy, float zz, float a, transformation t) {
@@ -54,29 +46,12 @@ void group::addGroup(group g) {
     groups.push_back(g);
 }
 
-void group::deleteG() {
-    for (size_t i = 0; i < models.size(); i++) {
-        models.pop_back();
-    }
-    for (size_t i = 0; i < transformations.size(); i++) {
-        transformations.pop_back();
-    }
-    for (size_t i = 0; i < groups.size(); i++) {
-        groups.pop_back();
-    }
-    printf("lll: %zu %zu %zu\n", models.size(), transformations.size(), groups.size());
-}
-
-bool group::isEmptyG() {
-    return models.size() == 0 && transformations.size() == 0 && groups.size() == 0;
-}
-
-std::vector<figure> group::getFiguras() {
+std::vector<figure> group::getModels() {
     return models;
 }
 std::vector<transform> group::getTransformations() {
     return transformations;
 }
-std::vector<group> group::getFilhos() {
+std::vector<group> group::getGroups() {
     return groups;
 }

@@ -18,22 +18,22 @@ namespace structs{
         float settings[12];
     };
 
-    struct cameraPolar {
+    struct cameraPolar{
         double distance;
         double alpha;
         double beta;
     };
 
-    class figure {
+    class figure{
 
     public:
         std::vector<point> pontos;
         void addPoint(float, float, float);
     };
 
-    enum class transformation { none, translate, rotate, scale, color };
+    enum class transformation {translate, rotate, scale, color};
 
-    class transform {
+    class transform{
         float x;
         float y;
         float z;
@@ -41,7 +41,6 @@ namespace structs{
         transformation trans;
 
     public:
-        void setTransform();
         void setTransform(float, float, float, float, transformation);
         float getX();
         float getY();
@@ -59,11 +58,9 @@ namespace structs{
         void addTransform(transform);
         void addFigure(figure);
         void addGroup(group);
-        void deleteG();
-        bool isEmptyG();
-        std::vector<figure> getFiguras();
+        std::vector<figure> getModels();
         std::vector<transform> getTransformations();
-        std::vector<group> getFilhos();
+        std::vector<group> getGroups();
     };
 
 }
