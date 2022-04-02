@@ -31,7 +31,11 @@ namespace structs{
         void addPoint(float, float, float);
     };
 
-    enum class transformation {translate, rotate, scale, color};
+    enum class transformation {
+        rotate,
+        translate,
+        scale,
+        color};
 
     class transform{
         float x;

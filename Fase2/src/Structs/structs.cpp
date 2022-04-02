@@ -12,6 +12,7 @@ void figure::addPoint(float a, float b, float c) {
     pontos.push_back(p);
 }
 
+// Altera os parâmetros de um objeto transform
 void transform::setTransform(float xx, float yy, float zz, float a, transformation t) {
     x = xx;
     y = yy;
@@ -19,6 +20,8 @@ void transform::setTransform(float xx, float yy, float zz, float a, transformati
     ang = a;
     trans = t;
 }
+
+// Getters transform
 
 float transform::getX() {
     return x;
@@ -36,15 +39,22 @@ transformation transform::getTrans() {
     return trans;
 }
 
+// Adiciona um transform a um grupo
 void group::addTransform(transform t) {
     transformations.push_back(t);
 }
+
+// Adiciona uma figura a um grupo
 void group::addFigure(figure f) {
     models.push_back(f);
 }
+
+// Adiciona um grupo filho ao grupo
 void group::addGroup(group g) {
     groups.push_back(g);
 }
+
+// Getters grupo
 
 std::vector<figure> group::getModels() {
     return models;

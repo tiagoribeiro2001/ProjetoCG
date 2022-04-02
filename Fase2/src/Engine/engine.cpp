@@ -60,13 +60,15 @@ void changeSize(int w, int h)
 
 void drawFigures(group g) {
     glPushMatrix();
+
+    // Aplica todas a transformações
     for (transform t : g.getTransformations()) {
         switch (t.getTrans()) {
-            case transformation::translate:
-                glTranslatef(t.getX(), t.getY(), t.getZ());
-                break;
             case transformation::rotate:
                 glRotatef(t.getAng(),t.getX(), t.getY(), t.getZ());
+                break;
+            case transformation::translate:
+                glTranslatef(t.getX(), t.getY(), t.getZ());
                 break;
             case transformation::scale:
                 glScalef(t.getX(), t.getY(), t.getZ());
@@ -78,9 +80,13 @@ void drawFigures(group g) {
                 break;
         }
     }
+
+    // Desenha todos os models
     for (figure f : g.getModels()) {
         drawFigure(f);
     }
+
+    // Passa para o grupo filho (recursividade), sendo aplicadas as transformações aplicadas a este (PopMatrix é feito no final)
     for (group gr : g.getGroups()) {
         drawFigures(gr);
     }
@@ -106,33 +112,32 @@ void renderScene(void){
     glutSwapBuffers();
 }
 
-group lerFicheiro3D(string fileName, group g) {
-    ifstream file;
-    file.open(fileName);
-    if (file.is_open()) {
+// Função que lâ um ficheiro .3d
+group lerFich3D(string fileName, group g) {
+    ifstream fich;
+    fich.open(fileName);
+    if (fich.is_open()) {
 
         figure figura;
         string line;
-        float x1, y1, z1 = 0.0f;
 
-        while (getline(file, line)) {
-            float cood[3];
+        while (getline(fich, line)) {
+            float coord[3];
 
-            std::string delimiter = " ";
             size_t pos = 0;
-            std::string token;
+            string delimitador = " ";
+            string token;
             int i = 0;
-            while ((pos = line.find(delimiter)) != std::string::npos) {
+            while ((pos = line.find(delimitador)) != std::string::npos) {
                 token = line.substr(0, pos);
-                cood[i] = std::stof(token);
+                coord[i] = std::stof(token);
                 i++;
-                line.erase(0, pos + delimiter.length());
+                line.erase(0, pos + delimitador.length());
             }
-            x1=cood[0],y1=cood[1],z1=cood[2];
-            figura.addPoint(x1,y1,z1);
+            figura.addPoint(coord[0], coord[1], coord[2]);
         }
         g.addFigure(figura);
-        file.close();
+        fich.close();
     }
 
     else{
@@ -142,6 +147,7 @@ group lerFicheiro3D(string fileName, group g) {
     return g;
 }
 
+// Função que lâ os parâmetros da camera no ficheiro XML
 void lerCamera(TiXmlElement* camera){
     TiXmlElement* cameraChild = camera->FirstChildElement();
     int i = 0;
@@ -160,24 +166,19 @@ void lerCamera(TiXmlElement* camera){
     }
 }
 
-group parseGroupXML(TiXmlElement* gr, group g){
+// Função que lê o grupo principal (e todos os seus filhos) do ficheiro XML
+group lerGroup(TiXmlElement* gr, group g){
     float x, y, z, angle;
     TiXmlElement* elem = gr->FirstChildElement();
 
     while (elem){
 
+        // Primeiramente lê todas as transformações
         if(strcmp(elem->Value(),"transform")==0) {
             transform t{};
             TiXmlElement* transChild = elem->FirstChildElement();
             while (transChild) {
-                if (strcmp(transChild->Value(), "translate") == 0) {
-                    x = atof(transChild->Attribute("x"));
-                    y = atof(transChild->Attribute("y"));
-                    z = atof(transChild->Attribute("z"));
-
-                    t.setTransform(x, y, z, 0, transformation::translate);
-                    g.addTransform(t);
-                } else if (strcmp(transChild->Value(), "rotate") == 0) {
+                if (strcmp(transChild->Value(), "rotate") == 0) {
                     angle = atof(transChild->Attribute("angle"));
                     x = atof(transChild->Attribute("x"));
                     y = atof(transChild->Attribute("y"));
@@ -185,14 +186,24 @@ group parseGroupXML(TiXmlElement* gr, group g){
 
                     t.setTransform(x, y, z, angle, transformation::rotate);
                     g.addTransform(t);
-                } else if (strcmp(transChild->Value(), "scale") == 0) {
+                }
+                else if (strcmp(transChild->Value(), "translate") == 0) {
+                    x = atof(transChild->Attribute("x"));
+                    y = atof(transChild->Attribute("y"));
+                    z = atof(transChild->Attribute("z"));
+
+                    t.setTransform(x, y, z, 0, transformation::translate);
+                    g.addTransform(t);
+                }
+                else if (strcmp(transChild->Value(), "scale") == 0) {
                     x = atof(transChild->Attribute("x"));
                     y = atof(transChild->Attribute("y"));
                     z = atof(transChild->Attribute("z"));
 
                     t.setTransform(x, y, z, 0, transformation::scale);
                     g.addTransform(t);
-                } else if (strcmp(transChild->Value(), "color") == 0) {
+                }
+                else if (strcmp(transChild->Value(), "color") == 0) {
                     x = atof(transChild->Attribute("r"));
                     y = atof(transChild->Attribute("g"));
                     z = atof(transChild->Attribute("b"));
@@ -200,24 +211,27 @@ group parseGroupXML(TiXmlElement* gr, group g){
                     t.setTransform(x, y, z, 0, transformation::color);
                     g.addTransform(t);
                 }
+
                 transChild = transChild->NextSiblingElement();
             }
         }
 
+        // Depois lê todos os ficheiros (models)
         else if (strcmp(elem->Value(), "models") == 0) {
             TiXmlElement *model = elem->FirstChildElement("model");
 
             // Lê todos os ficheiros .3d
             while (model) {
                 const char *ficheiro = model->Attribute("file");
-                g = lerFicheiro3D(ficheiro, g);
+                g = lerFich3D(ficheiro, g);
                 model = model->NextSiblingElement("model");
             }
         }
 
+        // No fim lê todos os grupos filhos
         else if (strcmp(elem->Value(), "group") == 0){
             group childGr;
-            childGr = parseGroupXML(elem, childGr);
+            childGr = lerGroup(elem, childGr);
             g.addGroup(childGr);
         }
 
@@ -230,16 +244,18 @@ group parseGroupXML(TiXmlElement* gr, group g){
 int lerFicheiroXML(std::string xml){
     TiXmlDocument fich;
     if (fich.LoadFile(xml.c_str())) {
+
+        // Ler as definições da camera
         TiXmlElement* worldElement =  fich.RootElement();
         TiXmlElement* cameraElement = worldElement->FirstChildElement();
         lerCamera(cameraElement);
 
-        //
+        // Ler o group principal
         TiXmlElement* groupElement = cameraElement->NextSiblingElement();
-        grupo = parseGroupXML(groupElement, grupo);
+        grupo = lerGroup(groupElement, grupo);
     }
     else{
-        printf("File does not exist!\n");
+        printf("ERROR: File does not exist!\n");
         return -1;
     }
     return 0;
@@ -297,7 +313,7 @@ int main(int argc, char** argv){
             glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
             glutInitWindowPosition(100, 100);
             glutInitWindowSize(800, 800);
-            glutCreateWindow("Geometric Transforms  G07");
+            glutCreateWindow("Geometric Transforms G07");
 
             // put callback registry here
             glutDisplayFunc(renderScene);

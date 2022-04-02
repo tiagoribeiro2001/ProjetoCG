@@ -147,7 +147,7 @@
                 </models>
             </group>
             <group>
-                <!--Io-->
+                <!--Titã-->
                 <transform>
                     <translate x="2" y="0" z="0" />
                     <scale x="0.22" y="0.22" z="0.22" />

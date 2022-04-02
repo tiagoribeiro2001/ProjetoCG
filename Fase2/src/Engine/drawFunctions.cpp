@@ -27,8 +27,8 @@ void draw::drawFigure(figure f) {
     }
 }
 
+// Função que desenho um referencial xyz
 void draw::drawReferencial() {
-    // Desenhar referencial
     glBegin(GL_LINES);
 
     // Eixo dos xx em vermelho
