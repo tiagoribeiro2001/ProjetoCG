@@ -25,6 +25,66 @@ int createFile (vector<point> vertices, string name){
     return 0;
 }
 
+// Funcao que le o ficheiro patch que contem os dados da figura a ser feita com superficies de bezier
+figure readBezier(string fileName, int tesselation) {
+    ifstream fich;
+    fich.open(fileName);
+    figure fig;
+    if (fich.is_open()) {
+        string line;
+        int numPatches = 0;
+        int lineNum = 0;
+
+        figure points;
+        vector<int> indices;
+
+        while (getline(fich, line)) {
+
+            // Le o numero de patches
+            if (lineNum == 0) {
+                numPatches = atoi(line.c_str());
+            }
+
+            // Le os indices dos pontos de control dos patches
+            if (lineNum >= 1 && lineNum <= numPatches) {
+                string token;
+                istringstream tokenizer(line);
+                for (int i = 0; i < 15; i++) {
+                    getline(tokenizer, token, ',');
+                    indices.push_back(stof(token));
+                }
+                getline(tokenizer, token);
+                indices.push_back(stof(token));
+            }
+
+            // Le os pontos de control
+            if (lineNum > numPatches + 1) {
+                string token;
+                string tokens[3];
+                istringstream tokenizer(line);
+
+                getline(tokenizer, tokens[0], ',');
+                getline(tokenizer, tokens[1], ',');
+                getline(tokenizer, tokens[2]);
+
+                points.addPoint(stof(tokens[0]), stof(tokens[1]), stof(tokens[2]));
+
+            }
+            lineNum++;
+        }
+
+        fig = createBezier(points, indices, tesselation);
+
+    }
+    else {
+        printf("ERROR: Can't open .patch file: %s", fileName.c_str());
+    }
+
+    fich.close();
+
+    return fig;
+}
+
 int main(int argc, char* argv[]) {
     figure f;
 
@@ -111,6 +171,23 @@ int main(int argc, char* argv[]) {
             if (createFile(f.pontos, argv[6]) == 0) {
                 printf("Done.\n");
             }
+        }
+
+        // Receber os parâmetros e gerar o ficheiro 3d a partir de superficies de bezier
+        else if ((strcmp(argv[1], "bezier") == 0) && (argc == 5)) {
+            char* fileBezier = argv[2];
+            stringstream aux(argv[3]);
+            int tesselation = 0;
+            aux >> tesselation;
+
+
+            f = readBezier(fileBezier, tesselation);
+            if (!f.pontos.empty()) {
+                if (createFile(f.pontos, argv[4]) == 0) {
+                    printf("Done\n");
+                }
+            }
+
         }
 
         else {
