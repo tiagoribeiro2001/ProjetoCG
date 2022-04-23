@@ -11,10 +11,14 @@ cmath
 -
 vertices.hpp
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Generator/vertices.hpp
+../Matrices/matrices.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Matrices/matrices.hpp
 
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Generator/vertices.hpp
 ../Structs/structs.hpp
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Structs/structs.hpp
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Matrices/matrices.hpp
 
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Structs/structs.hpp
 cstdio

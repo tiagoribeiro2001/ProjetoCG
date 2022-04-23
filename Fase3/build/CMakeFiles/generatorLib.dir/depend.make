@@ -3,5 +3,6 @@
 
 CMakeFiles/generatorLib.dir/src/Generator/vertices.cpp.o: ../src/Generator/vertices.cpp
 CMakeFiles/generatorLib.dir/src/Generator/vertices.cpp.o: ../src/Generator/vertices.hpp
+CMakeFiles/generatorLib.dir/src/Generator/vertices.cpp.o: ../src/Matrices/matrices.hpp
 CMakeFiles/generatorLib.dir/src/Generator/vertices.cpp.o: ../src/Structs/structs.hpp
 

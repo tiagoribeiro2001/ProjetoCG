@@ -137,6 +137,19 @@ generatorLib/fast:
 .PHONY : generatorLib/fast
 
 #=============================================================================
+# Target rules for targets named matricesLib
+
+# Build rule for target.
+matricesLib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 matricesLib
+.PHONY : matricesLib
+
+# fast build rule for target.
+matricesLib/fast:
+	$(MAKE) -f CMakeFiles/matricesLib.dir/build.make CMakeFiles/matricesLib.dir/build
+.PHONY : matricesLib/fast
+
+#=============================================================================
 # Target rules for targets named engineLib
 
 # Build rule for target.
@@ -296,6 +309,33 @@ src/Generator/vertices.cpp.s:
 	$(MAKE) -f CMakeFiles/generatorLib.dir/build.make CMakeFiles/generatorLib.dir/src/Generator/vertices.cpp.s
 .PHONY : src/Generator/vertices.cpp.s
 
+src/Matrices/matrices.o: src/Matrices/matrices.cpp.o
+
+.PHONY : src/Matrices/matrices.o
+
+# target to build an object file
+src/Matrices/matrices.cpp.o:
+	$(MAKE) -f CMakeFiles/matricesLib.dir/build.make CMakeFiles/matricesLib.dir/src/Matrices/matrices.cpp.o
+.PHONY : src/Matrices/matrices.cpp.o
+
+src/Matrices/matrices.i: src/Matrices/matrices.cpp.i
+
+.PHONY : src/Matrices/matrices.i
+
+# target to preprocess a source file
+src/Matrices/matrices.cpp.i:
+	$(MAKE) -f CMakeFiles/matricesLib.dir/build.make CMakeFiles/matricesLib.dir/src/Matrices/matrices.cpp.i
+.PHONY : src/Matrices/matrices.cpp.i
+
+src/Matrices/matrices.s: src/Matrices/matrices.cpp.s
+
+.PHONY : src/Matrices/matrices.s
+
+# target to generate assembly for a file
+src/Matrices/matrices.cpp.s:
+	$(MAKE) -f CMakeFiles/matricesLib.dir/build.make CMakeFiles/matricesLib.dir/src/Matrices/matrices.cpp.s
+.PHONY : src/Matrices/matrices.cpp.s
+
 src/Structs/structs.o: src/Structs/structs.cpp.o
 
 .PHONY : src/Structs/structs.o
@@ -441,6 +481,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... structsLib"
 	@echo "... generatorLib"
+	@echo "... matricesLib"
 	@echo "... engineLib"
 	@echo "... Lib"
 	@echo "... generator"
@@ -457,6 +498,9 @@ help:
 	@echo "... src/Generator/vertices.o"
 	@echo "... src/Generator/vertices.i"
 	@echo "... src/Generator/vertices.s"
+	@echo "... src/Matrices/matrices.o"
+	@echo "... src/Matrices/matrices.i"
+	@echo "... src/Matrices/matrices.s"
 	@echo "... src/Structs/structs.o"
 	@echo "... src/Structs/structs.i"
 	@echo "... src/Structs/structs.s"

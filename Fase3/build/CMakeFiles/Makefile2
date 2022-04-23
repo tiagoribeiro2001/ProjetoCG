@@ -55,6 +55,7 @@ CMAKE_BINARY_DIR = "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/Pro
 # The main recursive "all" target.
 all: CMakeFiles/structsLib.dir/all
 all: CMakeFiles/generatorLib.dir/all
+all: CMakeFiles/matricesLib.dir/all
 all: CMakeFiles/engineLib.dir/all
 all: CMakeFiles/Lib.dir/all
 all: CMakeFiles/generator.dir/all
@@ -70,6 +71,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/structsLib.dir/clean
 clean: CMakeFiles/generatorLib.dir/clean
+clean: CMakeFiles/matricesLib.dir/clean
 clean: CMakeFiles/engineLib.dir/clean
 clean: CMakeFiles/Lib.dir/clean
 clean: CMakeFiles/generator.dir/clean
@@ -84,7 +86,7 @@ clean: CMakeFiles/engine.dir/clean
 CMakeFiles/structsLib.dir/all:
 	$(MAKE) -f CMakeFiles/structsLib.dir/build.make CMakeFiles/structsLib.dir/depend
 	$(MAKE) -f CMakeFiles/structsLib.dir/build.make CMakeFiles/structsLib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" --progress-num=14,15 "Built target structsLib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" --progress-num=16,17 "Built target structsLib"
 .PHONY : CMakeFiles/structsLib.dir/all
 
 # Build rule for subdir invocation for target.
@@ -130,6 +132,33 @@ generatorLib: CMakeFiles/generatorLib.dir/rule
 CMakeFiles/generatorLib.dir/clean:
 	$(MAKE) -f CMakeFiles/generatorLib.dir/build.make CMakeFiles/generatorLib.dir/clean
 .PHONY : CMakeFiles/generatorLib.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/matricesLib.dir
+
+# All Build rule for target.
+CMakeFiles/matricesLib.dir/all:
+	$(MAKE) -f CMakeFiles/matricesLib.dir/build.make CMakeFiles/matricesLib.dir/depend
+	$(MAKE) -f CMakeFiles/matricesLib.dir/build.make CMakeFiles/matricesLib.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" --progress-num=14,15 "Built target matricesLib"
+.PHONY : CMakeFiles/matricesLib.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/matricesLib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/matricesLib.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 0
+.PHONY : CMakeFiles/matricesLib.dir/rule
+
+# Convenience name for target.
+matricesLib: CMakeFiles/matricesLib.dir/rule
+
+.PHONY : matricesLib
+
+# clean rule for target.
+CMakeFiles/matricesLib.dir/clean:
+	$(MAKE) -f CMakeFiles/matricesLib.dir/build.make CMakeFiles/matricesLib.dir/clean
+.PHONY : CMakeFiles/matricesLib.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/engineLib.dir
@@ -191,6 +220,7 @@ CMakeFiles/Lib.dir/clean:
 # All Build rule for target.
 CMakeFiles/generator.dir/all: CMakeFiles/structsLib.dir/all
 CMakeFiles/generator.dir/all: CMakeFiles/generatorLib.dir/all
+CMakeFiles/generator.dir/all: CMakeFiles/matricesLib.dir/all
 CMakeFiles/generator.dir/all: CMakeFiles/Lib.dir/all
 	$(MAKE) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/depend
 	$(MAKE) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/build
@@ -199,7 +229,7 @@ CMakeFiles/generator.dir/all: CMakeFiles/Lib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/generator.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 11
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 13
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/generator.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 0
 .PHONY : CMakeFiles/generator.dir/rule
@@ -219,6 +249,7 @@ CMakeFiles/generator.dir/clean:
 
 # All Build rule for target.
 CMakeFiles/engine.dir/all: CMakeFiles/structsLib.dir/all
+CMakeFiles/engine.dir/all: CMakeFiles/matricesLib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/engineLib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/Lib.dir/all
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/depend
@@ -228,7 +259,7 @@ CMakeFiles/engine.dir/all: CMakeFiles/Lib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/engine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 11
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 13
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/engine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/build/CMakeFiles" 0
 .PHONY : CMakeFiles/engine.dir/rule

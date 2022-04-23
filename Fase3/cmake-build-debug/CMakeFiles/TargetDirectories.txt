@@ -5,4 +5,5 @@
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/cmake-build-debug/CMakeFiles/generator.dir
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/cmake-build-debug/CMakeFiles/generatorLib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/cmake-build-debug/CMakeFiles/matricesLib.dir
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/cmake-build-debug/CMakeFiles/structsLib.dir

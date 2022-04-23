@@ -9,7 +9,6 @@ namespace generate{
     figure createSphere(float, int, int);
     figure createCone(float, float, int, int);
     figure createTorus(float, float, int, int);
-    void multMatrixVector(float* m, float* v, float* res);
     void getPointBezier(float u, float v, float** matrixX, float** matrixY, float** matrixZ, float* pos);
     figure createBezier(figure points, std::vector<int> indices, int tesselation);
 }

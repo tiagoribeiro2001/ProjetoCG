@@ -39,14 +39,21 @@ add_library(
         src/Structs/structs.hpp
 )
 
+add_library(
+        matricesLib
+        src/Matrices/matrices.cpp
+        src/Matrices/matrices.hpp
+)
+
 target_link_libraries(generator generatorLib)
 target_link_libraries(generator Lib)
 target_link_libraries(generator structsLib)
+target_link_libraries(generator matricesLib)
 
 target_link_libraries(engine engineLib)
 target_link_libraries(engine Lib)
 target_link_libraries(engine structsLib)
-
+target_link_libraries(engine matricesLib)
 
 
 

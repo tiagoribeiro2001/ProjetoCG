@@ -82,6 +82,7 @@ generator: CMakeFiles/generator.dir/build.make
 generator: libgeneratorLib.a
 generator: libLib.a
 generator: libstructsLib.a
+generator: libmatricesLib.a
 generator: CMakeFiles/generator.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable generator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/generator.dir/link.txt --verbose=$(VERBOSE)

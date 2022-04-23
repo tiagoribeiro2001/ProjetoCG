@@ -82,6 +82,7 @@ engine: CMakeFiles/engine.dir/build.make
 engine: libengineLib.a
 engine: libLib.a
 engine: libstructsLib.a
+engine: libmatricesLib.a
 engine: /usr/lib/x86_64-linux-gnu/libGL.so
 engine: /usr/lib/x86_64-linux-gnu/libGLU.so
 engine: /usr/lib/x86_64-linux-gnu/libglut.so

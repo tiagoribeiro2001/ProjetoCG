@@ -1,5 +1,6 @@
 #include <cmath>
 #include "vertices.hpp"
+#include "../Matrices/matrices.hpp"
 
 figure generate::createPlane(float units, float divs) {
 
@@ -223,14 +224,6 @@ figure generate::createTorus(float radiusI, float radiusE, int slices, int stack
     return f;
 }
 
-void generate::multMatrixVector(float* m, float* v, float* res){
-    for (int j = 0; j < 4; ++j) {
-        res[j] = 0;
-        for (int k = 0; k < 4; ++k) {
-            res[j] += v[k] * m[j * 4 + k];
-        }
-    }
-}
 
 void generate::getPointBezier(float u, float v, float** matrixX, float** matrixY, float** matrixZ, float* pos) {
     float bezierMatrix[4][4] = { { -1.0f, 3.0f, -3.0f, 1.0f },
@@ -250,14 +243,14 @@ void generate::getPointBezier(float u, float v, float** matrixX, float** matrixY
     float my[4];
     float mz[4];
 
-    multMatrixVector((float*)bezierMatrix, vetorV, vetorAux);
-    multMatrixVector((float*)matrixX, vetorAux, px);
-    multMatrixVector((float*)matrixY, vetorAux, py);
-    multMatrixVector((float*)matrixZ, vetorAux, pz);
+    matrices::multMatrixVector((float*)bezierMatrix, vetorV, vetorAux);
+    matrices::multMatrixVector((float*)matrixX, vetorAux, px);
+    matrices::multMatrixVector((float*)matrixY, vetorAux, py);
+    matrices::multMatrixVector((float*)matrixZ, vetorAux, pz);
 
-    multMatrixVector((float*)bezierMatrix, px, mx);
-    multMatrixVector((float*)bezierMatrix, py, my);
-    multMatrixVector((float*)bezierMatrix, pz, mz);
+    matrices::multMatrixVector((float*)bezierMatrix, px, mx);
+    matrices::multMatrixVector((float*)bezierMatrix, py, my);
+    matrices::multMatrixVector((float*)bezierMatrix, pz, mz);
 
 
     pos[0] = (vetorU[0] * mx[0]) + (vetorU[1] * mx[1]) + (vetorU[2] * mx[2]) + (vetorU[3] * mx[3]);
