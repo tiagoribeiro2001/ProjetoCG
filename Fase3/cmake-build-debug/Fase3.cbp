@@ -346,6 +346,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Engine/catmullRom.cpp">
+			<Option target="engineLib"/>
+		</Unit>
+		<Unit filename="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Engine/catmullRom.hpp">
+			<Option target="engineLib"/>
+		</Unit>
 		<Unit filename="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Engine/drawFunctions.cpp">
 			<Option target="engineLib"/>
 		</Unit>

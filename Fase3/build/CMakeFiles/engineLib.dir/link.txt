@@ -1,2 +1,2 @@
-/usr/bin/ar qc libengineLib.a  CMakeFiles/engineLib.dir/src/Engine/drawFunctions.cpp.o
+/usr/bin/ar qc libengineLib.a  CMakeFiles/engineLib.dir/src/Engine/drawFunctions.cpp.o CMakeFiles/engineLib.dir/src/Engine/catmullRom.cpp.o
 /usr/bin/ranlib libengineLib.a

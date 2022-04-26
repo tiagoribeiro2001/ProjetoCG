@@ -201,6 +201,33 @@ engine/fast:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/build
 .PHONY : engine/fast
 
+src/Engine/catmullRom.o: src/Engine/catmullRom.cpp.o
+
+.PHONY : src/Engine/catmullRom.o
+
+# target to build an object file
+src/Engine/catmullRom.cpp.o:
+	$(MAKE) -f CMakeFiles/engineLib.dir/build.make CMakeFiles/engineLib.dir/src/Engine/catmullRom.cpp.o
+.PHONY : src/Engine/catmullRom.cpp.o
+
+src/Engine/catmullRom.i: src/Engine/catmullRom.cpp.i
+
+.PHONY : src/Engine/catmullRom.i
+
+# target to preprocess a source file
+src/Engine/catmullRom.cpp.i:
+	$(MAKE) -f CMakeFiles/engineLib.dir/build.make CMakeFiles/engineLib.dir/src/Engine/catmullRom.cpp.i
+.PHONY : src/Engine/catmullRom.cpp.i
+
+src/Engine/catmullRom.s: src/Engine/catmullRom.cpp.s
+
+.PHONY : src/Engine/catmullRom.s
+
+# target to generate assembly for a file
+src/Engine/catmullRom.cpp.s:
+	$(MAKE) -f CMakeFiles/engineLib.dir/build.make CMakeFiles/engineLib.dir/src/Engine/catmullRom.cpp.s
+.PHONY : src/Engine/catmullRom.cpp.s
+
 src/Engine/drawFunctions.o: src/Engine/drawFunctions.cpp.o
 
 .PHONY : src/Engine/drawFunctions.o
@@ -486,6 +513,9 @@ help:
 	@echo "... Lib"
 	@echo "... generator"
 	@echo "... engine"
+	@echo "... src/Engine/catmullRom.o"
+	@echo "... src/Engine/catmullRom.i"
+	@echo "... src/Engine/catmullRom.s"
 	@echo "... src/Engine/drawFunctions.o"
 	@echo "... src/Engine/drawFunctions.i"
 	@echo "... src/Engine/drawFunctions.s"

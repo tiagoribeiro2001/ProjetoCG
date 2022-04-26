@@ -1,16 +1,32 @@
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glew.h>
+#include <GL/glut.h>
+#endif
+
 #include "drawFunctions.hpp"
 #include "../tinyXML/tinyxml.h"
+#include "../Matrices/matrices.hpp"
+#include "catmullRom.hpp"
 
 #include <iostream>
 #include <map>
 #include <list>
 #include <cmath>
+#include <vector>
 
 using namespace draw;
 using namespace std;
 using namespace structs;
 
 group grupo;
+
+GLuint vertices;
+std::vector<float> vbo;
+int pontosLidos = 0;
+
+float aux_y[3] = {0,1,0};
 
 cameraPolar camPol = {0,0,0};
 cameraSettings cam = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -81,10 +97,56 @@ void drawFigures(group g) {
         }
     }
 
+    for (timedTransform tt : g.getTimedTransformations()) {
+        switch (tt.getTrans()) {
+            case timedTransformation::rotate: {
+                auto tempo = (float) glutGet(GLUT_ELAPSED_TIME);
+                float angle = ((tempo / 1000) * 360) / (float)tt.getTime();
+                glRotatef(angle, tt.getX(), tt.getY(), tt.getZ());
+                glutPostRedisplay();
+                break;
+            }
+            case timedTransformation::translate: {
+                std::vector<structs::point> pontos = tt.getCurvePoints();
+                // Desenhar a curva => drawFunctions.cpp
+                glPushMatrix();
+                // drawCatmull(pontos);
+                glPopMatrix();
+                // Escolher um ponto da curva
+                float pos[3] = { 0.0, 0.0, 0.0 };
+                float deriv[3] = { 0.0, 0.0, 0.0 };
+
+                float timeT = ((float) glutGet(GLUT_ELAPSED_TIME) / 1000) / (float)(tt.getTime());
+                catmull::getGlobalCatmullRomPoint(&tt, timeT, (float*)pos, (float*)deriv);
+
+                glTranslatef(pos[0], pos[1], pos[2]);
+
+                float m[4][4];
+                float x[3], z[3];
+
+                matrices::cross(deriv, aux_y, z);
+                matrices::cross(z, deriv, aux_y);
+                matrices::normalize(deriv);
+                matrices::normalize(aux_y);
+                matrices::normalize(z);
+                matrices::buildRotMatrix(deriv, aux_y, z, *m);
+                glMultMatrixf(*m);
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
     // Desenha todos os models
     for (figure f : g.getModels()) {
         drawFigure(f);
     }
+
+    glBindBuffer(GL_ARRAY_BUFFER, vertices);
+    glVertexPointer(3, GL_FLOAT, 0, 0);
+    glDrawArrays(GL_TRIANGLES, pontosLidos, g.getTrianglesCount());
+    pontosLidos += g.getTrianglesCount();
 
     // Passa para o grupo filho (recursividade), sendo aplicadas as transformações aplicadas a este (PopMatrix é feito no final)
     for (group gr : g.getGroups()) {
@@ -104,9 +166,10 @@ void renderScene(void){
               cam.settings[6], cam.settings[7], cam.settings[8]);
 
 
-    // drawReferencial();
+    drawReferencial();
 
     drawFigures(grupo);
+    pontosLidos = 0;
 
     // End of frame
     glutSwapBuffers();
@@ -120,6 +183,7 @@ group lerFich3D(string fileName, group g) {
 
         figure figura;
         string line;
+        int count = 0;
 
         while (getline(fich, line)) {
             float coord[3];
@@ -134,9 +198,14 @@ group lerFich3D(string fileName, group g) {
                 i++;
                 line.erase(0, pos + delimitador.length());
             }
-            figura.addPoint(coord[0], coord[1], coord[2]);
+            // figura.addPoint(coord[0], coord[1], coord[2]);
+            vbo.push_back(coord[0]);
+            vbo.push_back(coord[1]);
+            vbo.push_back(coord[2]);
+            count++;
         }
-        g.addFigure(figura);
+        // g.addFigure(figura);
+        g.addTrianglesCount(count);
         fich.close();
     }
 
@@ -169,16 +238,27 @@ void lerCamera(TiXmlElement* camera){
 // Função que lê o grupo principal (e todos os seus filhos) do ficheiro XML
 group lerGroup(TiXmlElement* gr, group g){
     float x, y, z, angle;
+    int time;
     TiXmlElement* elem = gr->FirstChildElement();
 
     while (elem){
-
         // Primeiramente lê todas as transformações
         if(strcmp(elem->Value(),"transform")==0) {
             transform t{};
+            timedTransform tt{};
             TiXmlElement* transChild = elem->FirstChildElement();
             while (transChild) {
                 if (strcmp(transChild->Value(), "rotate") == 0) {
+                    if (transChild->Attribute("time")) {
+                        time = atoi(transChild->Attribute("time"));
+                        x = atof(transChild->Attribute("x"));
+                        y = atof(transChild->Attribute("y"));
+                        z = atof(transChild->Attribute("z"));
+
+                        tt.setTimedRotate(time, x, y, z);
+                        g.addTimedTransformation(tt);
+                    }
+                    else {
                     angle = atof(transChild->Attribute("angle"));
                     x = atof(transChild->Attribute("x"));
                     y = atof(transChild->Attribute("y"));
@@ -186,14 +266,47 @@ group lerGroup(TiXmlElement* gr, group g){
 
                     t.setTransform(x, y, z, angle, transformation::rotate);
                     g.addTransform(t);
+                    }
                 }
                 else if (strcmp(transChild->Value(), "translate") == 0) {
+                    if (transChild->Attribute("time")) {
+                        time = atoi(transChild->Attribute("time"));
+                        printf("time: %d\n", time);
+                        TiXmlElement *point = transChild->FirstChildElement("point");
+                        std::vector<structs::point> pontos;
+                        while (point) {
+                            structs::point p;
+                            p.x = atof(point->Attribute("x"));
+                            p.y = atof(point->Attribute("y"));
+                            p.z = atof(point->Attribute("z"));
+                            pontos.push_back(p);
+                            //next sibling
+                            point = point->NextSiblingElement("point");
+                        }
+                        tt.setTimedTranslate(time, pontos);
+
+                        float res[3];
+                        float deriv[3];
+                        float values;
+                        for (values = 0; values < 1; values += 0.01) {
+                            catmull::getGlobalCatmullRomPoint(&tt, values, res, deriv);
+                            structs::point p;
+                            p.x = res[0];
+                            p.y = res[1];
+                            p.z = res[2];
+                            tt.addCurvePoints(p);
+                        }
+
+                        g.addTimedTransformation(tt);
+                    }
+                    else {
                     x = atof(transChild->Attribute("x"));
                     y = atof(transChild->Attribute("y"));
                     z = atof(transChild->Attribute("z"));
 
                     t.setTransform(x, y, z, 0, transformation::translate);
                     g.addTransform(t);
+                    }
                 }
                 else if (strcmp(transChild->Value(), "scale") == 0) {
                     x = atof(transChild->Attribute("x"));
@@ -321,6 +434,16 @@ int main(int argc, char** argv){
 
             glutKeyboardFunc(keyboardFunc);
             glutSpecialFunc(processSpecialKeys);
+
+            // vbo initialization
+            #ifndef __APPLE__
+                glewInit();
+            #endif
+
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glGenBuffers(1, &vertices);
+            glBindBuffer(GL_ARRAY_BUFFER, vertices);
+            glBufferData(GL_ARRAY_BUFFER, vbo.size() * sizeof(float), vbo.data(), GL_STATIC_DRAW);
 
             // some OpenGL settings
             glEnable(GL_DEPTH_TEST);

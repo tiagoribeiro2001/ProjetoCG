@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/engineLib.dir/src/Engine/catmullRom.cpp.o"
   "CMakeFiles/engineLib.dir/src/Engine/drawFunctions.cpp.o"
   "libengineLib.a"
   "libengineLib.pdb"
