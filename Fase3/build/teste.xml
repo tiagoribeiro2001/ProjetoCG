@@ -10,10 +10,10 @@
             <!--Sol-->
             <transform>
                 <translate time="10">
-                    <point x="1" y="1" z="0" />
-                    <point x="1" y="1" z="0" />
-                    <point x="1" y="1" z="0" />
-                    <point x="1" y="1" z="0" />
+                    <point x="-1" y="0" z="0" />
+                    <point x="1" y="0" z="1" />
+                    <point x="1" y="0" z="-1" />
+                    <point x="-1" y="0" z="-1" />
                 </translate>
             </transform>
             <models>

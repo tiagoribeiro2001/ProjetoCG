@@ -7,7 +7,7 @@
 namespace catmull{
     void getCatmullRomPoint(float, structs::point[], float*, float*);
     void getGlobalCatmullRomPoint(structs::timedTransform*, float , float* , float*);
-    void calculateCurvePoints(structs::timedTransform translation);
+    void calculateCurvePoints(structs::timedTransform*);
 }
 
 #endif //FASE3_CATMULLROM_HPP

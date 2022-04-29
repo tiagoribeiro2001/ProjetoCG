@@ -103,7 +103,6 @@ void drawFigures(group g) {
                 auto tempo = (float) glutGet(GLUT_ELAPSED_TIME);
                 float angle = ((tempo / 1000) * 360) / (float)tt.getTime();
                 glRotatef(angle, tt.getX(), tt.getY(), tt.getZ());
-                glutPostRedisplay();
                 break;
             }
             case timedTransformation::translate: {
@@ -285,16 +284,11 @@ group lerGroup(TiXmlElement* gr, group g){
                         }
                         tt.setTimedTranslate(time, pontos);
 
-                        float res[3];
-                        float deriv[3];
-                        float values;
-                        for (values = 0; values < 1; values += 0.01) {
-                            catmull::getGlobalCatmullRomPoint(&tt, values, res, deriv);
-                            structs::point p;
-                            p.x = res[0];
-                            p.y = res[1];
-                            p.z = res[2];
-                            tt.addCurvePoints(p);
+                        catmull::calculateCurvePoints(&tt);
+
+
+                        for(structs::point p : tt.getCurvePoints()){
+                            printf("x: %f  y: %f  z: %f\n", p.x, p.y, p.z);
                         }
 
                         g.addTimedTransformation(tt);
@@ -431,6 +425,7 @@ int main(int argc, char** argv){
             // put callback registry here
             glutDisplayFunc(renderScene);
             glutReshapeFunc(changeSize);
+            glutIdleFunc(renderScene);
 
             glutKeyboardFunc(keyboardFunc);
             glutSpecialFunc(processSpecialKeys);
