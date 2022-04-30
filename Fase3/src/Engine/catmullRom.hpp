@@ -1,6 +1,12 @@
 #ifndef FASE3_CATMULLROM_HPP
 #define FASE3_CATMULLROM_HPP
 
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 #include "../Structs/structs.hpp"
 #include "../Matrices/matrices.hpp"
 

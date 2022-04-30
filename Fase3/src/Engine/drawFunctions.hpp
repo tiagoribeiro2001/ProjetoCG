@@ -16,6 +16,7 @@ namespace draw {
 
     void drawFigure(structs::figure);
     void drawReferencial();
+    void drawCatmullRomCurve(structs::timedTransform);
 
 }
 

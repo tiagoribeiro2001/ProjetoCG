@@ -9,7 +9,7 @@
         <group>
             <!--Sol-->
             <transform>
-                <translate time="10">
+                <translate time="10" align="false">
                     <point x="-1" y="0" z="0" />
                     <point x="1" y="0" z="1" />
                     <point x="1" y="0" z="-1" />

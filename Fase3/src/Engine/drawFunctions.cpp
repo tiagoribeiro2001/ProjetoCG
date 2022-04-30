@@ -48,3 +48,14 @@ void draw::drawReferencial() {
 
     glEnd();
 }
+
+void draw::drawCatmullRomCurve(structs::timedTransform tt) {
+
+    // Draw curve using line segments with GL_LINE_LOOP
+    glBegin(GL_LINE_LOOP);
+    glColor3f(0.8f, 0.8f, 0.8f);
+    for (point p : tt.getCurvePoints()){
+        glVertex3f(p.x,p.y,p.z);
+    }
+    glEnd();
+}

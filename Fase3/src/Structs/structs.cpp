@@ -58,9 +58,15 @@ float timedTransform::getZ() {
 int timedTransform::getTime() {
     return time;
 }
+
+bool timedTransform::isAligned(){
+    return align;
+}
+
 timedTransformation timedTransform::getTrans() {
     return trans;
 }
+
 std::vector<point> timedTransform::getPoints() {
     return points;
 }
@@ -69,11 +75,12 @@ std::vector<point> timedTransform::getCurvePoints() {
     return curvePoints;
 }
 
-void timedTransform::setTimedTranslate(int timer, std::vector<point> p) {
+void timedTransform::setTimedTranslate(int timer, bool aligned, std::vector<point> p) {
     time = timer;
     x = 0;
     y = 0;
     z = 0;
+    align = aligned;
     points = p;
     trans = timedTransformation::translate;
 }

@@ -7,6 +7,10 @@
 #IncludeRegexTransform: 
 
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Engine/catmullRom.hpp
+GLUT/glut.h
+-
+GL/glut.h
+-
 ../Structs/structs.hpp
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Structs/structs.hpp
 ../Matrices/matrices.hpp

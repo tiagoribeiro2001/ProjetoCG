@@ -66,17 +66,19 @@ namespace structs{
         float x;
         float y;
         float z;
+        bool align;
         timedTransformation trans;
         std::vector<point> points;
         std::vector<point> curvePoints;
 
     public:
-        void setTimedTranslate(int, std::vector<point>);
+        void setTimedTranslate(int, bool, std::vector<point>);
         void setTimedRotate(int, float, float, float);
         int getTime();
         float getX();
         float getY();
         float getZ();
+        bool isAligned();
         std::vector<point> getPoints();
         std::vector<point> getCurvePoints();
         timedTransformation getTrans();

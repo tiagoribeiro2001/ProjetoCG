@@ -107,11 +107,11 @@ void drawFigures(group g) {
             }
             case timedTransformation::translate: {
                 std::vector<structs::point> pontos = tt.getCurvePoints();
-                // Desenhar a curva => drawFunctions.cpp
+                // Desenhar a curva de CatmullRom
                 glPushMatrix();
-                // drawCatmull(pontos);
+                draw::drawCatmullRomCurve(tt);
                 glPopMatrix();
-                // Escolher um ponto da curva
+
                 float pos[3] = { 0.0, 0.0, 0.0 };
                 float deriv[3] = { 0.0, 0.0, 0.0 };
 
@@ -120,16 +120,19 @@ void drawFigures(group g) {
 
                 glTranslatef(pos[0], pos[1], pos[2]);
 
-                float m[4][4];
-                float x[3], z[3];
+                if (tt.isAligned()) {
+                    float m[4][4];
+                    float x[3], z[3];
 
-                matrices::cross(deriv, aux_y, z);
-                matrices::cross(z, deriv, aux_y);
-                matrices::normalize(deriv);
-                matrices::normalize(aux_y);
-                matrices::normalize(z);
-                matrices::buildRotMatrix(deriv, aux_y, z, *m);
-                glMultMatrixf(*m);
+                    matrices::cross(deriv, aux_y, z);
+                    matrices::cross(z, deriv, aux_y);
+                    matrices::normalize(deriv);
+                    matrices::normalize(aux_y);
+                    matrices::normalize(z);
+                    matrices::buildRotMatrix(deriv, aux_y, z, *m);
+                    glMultMatrixf(*m);
+                }
+
                 break;
             }
             default:
@@ -238,6 +241,7 @@ void lerCamera(TiXmlElement* camera){
 group lerGroup(TiXmlElement* gr, group g){
     float x, y, z, angle;
     int time;
+    bool align;
     TiXmlElement* elem = gr->FirstChildElement();
 
     while (elem){
@@ -270,6 +274,10 @@ group lerGroup(TiXmlElement* gr, group g){
                 else if (strcmp(transChild->Value(), "translate") == 0) {
                     if (transChild->Attribute("time")) {
                         time = atoi(transChild->Attribute("time"));
+                        align = !strcmp((transChild->Attribute("align")), "true");
+                        if(align) {
+                            printf("align true\n");
+                        }
                         printf("time: %d\n", time);
                         TiXmlElement *point = transChild->FirstChildElement("point");
                         std::vector<structs::point> pontos;
@@ -282,7 +290,7 @@ group lerGroup(TiXmlElement* gr, group g){
                             //next sibling
                             point = point->NextSiblingElement("point");
                         }
-                        tt.setTimedTranslate(time, pontos);
+                        tt.setTimedTranslate(time, align, pontos);
 
                         catmull::calculateCurvePoints(&tt);
 
