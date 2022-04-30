@@ -26,6 +26,9 @@ GLuint vertices;
 std::vector<float> vbo;
 int pontosLidos = 0;
 
+bool wireframe = false;
+bool orbitas = false;
+
 float aux_y[3] = {0,1,0};
 
 cameraPolar camPol = {0,0,0};
@@ -107,10 +110,13 @@ void drawFigures(group g) {
             }
             case timedTransformation::translate: {
                 std::vector<structs::point> pontos = tt.getCurvePoints();
+
                 // Desenhar a curva de CatmullRom
-                glPushMatrix();
-                draw::drawCatmullRomCurve(tt);
-                glPopMatrix();
+                if (orbitas) {
+                    glPushMatrix();
+                    draw::drawCatmullRomCurve(tt);
+                    glPopMatrix();
+                }
 
                 float pos[3] = { 0.0, 0.0, 0.0 };
                 float deriv[3] = { 0.0, 0.0, 0.0 };
@@ -168,7 +174,7 @@ void renderScene(void){
               cam.settings[6], cam.settings[7], cam.settings[8]);
 
 
-    drawReferencial();
+    // drawReferencial();
 
     drawFigures(grupo);
     pontosLidos = 0;
@@ -275,10 +281,6 @@ group lerGroup(TiXmlElement* gr, group g){
                     if (transChild->Attribute("time")) {
                         time = atoi(transChild->Attribute("time"));
                         align = !strcmp((transChild->Attribute("align")), "true");
-                        if(align) {
-                            printf("align true\n");
-                        }
-                        printf("time: %d\n", time);
                         TiXmlElement *point = transChild->FirstChildElement("point");
                         std::vector<structs::point> pontos;
                         while (point) {
@@ -293,11 +295,6 @@ group lerGroup(TiXmlElement* gr, group g){
                         tt.setTimedTranslate(time, align, pontos);
 
                         catmull::calculateCurvePoints(&tt);
-
-
-                        for(structs::point p : tt.getCurvePoints()){
-                            printf("x: %f  y: %f  z: %f\n", p.x, p.y, p.z);
-                        }
 
                         g.addTimedTransformation(tt);
                     }
@@ -386,6 +383,19 @@ void keyboardFunc (unsigned char key, int x, int y){
             camPol.distance += 1;
             glutPostRedisplay();
             break;
+        case 'w':
+            if (wireframe){
+                glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+                wireframe = false;
+            }
+            else{
+                glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+                wireframe = true;
+            }
+            break;
+        case 'o':
+            orbitas = !orbitas;
+            break;
         default:
             break;
     }
@@ -428,7 +438,7 @@ int main(int argc, char** argv){
             glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
             glutInitWindowPosition(100, 100);
             glutInitWindowSize(800, 800);
-            glutCreateWindow("Geometric Transforms G07");
+            glutCreateWindow("Curves, Cubic Surfaces and VBOs G07");
 
             // put callback registry here
             glutDisplayFunc(renderScene);

@@ -25,6 +25,7 @@ namespace structs{
         double distance;
         double alpha;
         double beta;
+        int startX, startY, tracking;
     };
 
     class figure{
