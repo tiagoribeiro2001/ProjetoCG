@@ -225,14 +225,14 @@ figure generate::createTorus(float radiusI, float radiusE, int slices, int stack
 }
 
 
-void generate::getPointBezier(float u, float v, float** matrixX, float** matrixY, float** matrixZ, float* pos) {
+void generate::calculateBezierPoint(float u, float v, float** matrixX, float** matrixY, float** matrixZ, float* pos) {
     float bezierMatrix[4][4] = { { -1.0f, 3.0f, -3.0f, 1.0f },
                                  { 3.0f, -6.0f, 3.0f, 0.0f },
                                  { -3.0f, 3.0f, 0.0f, 0.0f },
                                  { 1.0f,  0.0f, 0.0f, 0.0f } };
 
-    float vetorU[4] = { u * u * u, u * u, u, 1 };
-    float vetorV[4] = { v * v * v, v * v, v, 1 };
+    float vetorU[4] = { powf(u, 3), powf(u, 2), u, 1 };
+    float vetorV[4] = { powf(v, 3), powf(v, 2), v, 1 };
 
     float vetorAux[4];
     float px[4];
@@ -259,7 +259,7 @@ void generate::getPointBezier(float u, float v, float** matrixX, float** matrixY
 
 }
 
-figure generate::createBezier(figure points, std::vector<int> indices, int tesselation){
+figure generate::createBezier(std::vector<point> points, std::vector<int> indices, int tesselation){
     figure f;
 
     float pos[4][3];
@@ -271,29 +271,29 @@ figure generate::createBezier(figure points, std::vector<int> indices, int tesse
     float v = 0;
     float inc = 1 / (float)tesselation;
 
-    for (size_t p = 0; p < indices.size(); p += 16) {
-        for (size_t i = 0; i < tesselation; i++) {
-            for (size_t j = 0; j < tesselation; j++) {
+    for (int p = 0; p < indices.size(); p += 16) {
+        for (int i = 0; i < tesselation; i++) {
+            for (int j = 0; j < tesselation; j++) {
                 u = inc * i;
                 v = inc * j;
                 float u2 = inc * (i + 1);
                 float v2 = inc * (j + 1);
 
 
-                for (size_t a = 0; a < 4; a++) {
-                    for (size_t b = 0; b < 4; b++) {
+                for (int a = 0; a < 4; a++) {
+                    for (int b = 0; b < 4; b++) {
 
-                        matrixX[a][b] = points.pontos.at(indices.at(p + a * 4 + b)).x;
-                        matrixY[a][b] = points.pontos.at(indices.at(p + a * 4 + b)).y;
-                        matrixZ[a][b] = points.pontos.at(indices.at(p + a * 4 + b)).z;
+                        matrixX[a][b] = points.at(indices.at(p + a * 4 + b)).x;
+                        matrixY[a][b] = points.at(indices.at(p + a * 4 + b)).y;
+                        matrixZ[a][b] = points.at(indices.at(p + a * 4 + b)).z;
 
                     }
                 }
 
-                getPointBezier(u, v, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[0]);
-                getPointBezier(u, v2, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[1]);
-                getPointBezier(u2, v, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[2]);
-                getPointBezier(u2, v2, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[3]);
+                calculateBezierPoint(u, v, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[0]);
+                calculateBezierPoint(u, v2, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[1]);
+                calculateBezierPoint(u2, v, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[2]);
+                calculateBezierPoint(u2, v2, (float**)matrixX, (float**)matrixY, (float**)matrixZ, pos[3]);
 
                 f.addPoint(pos[3][0], pos[3][1], pos[3][2]);
                 f.addPoint(pos[2][0], pos[2][1], pos[2][2]);

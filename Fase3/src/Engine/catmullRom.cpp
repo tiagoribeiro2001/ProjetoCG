@@ -46,7 +46,6 @@ void catmull::getGlobalCatmullRomPoint(structs::timedTransform* transf, float gt
     indices[3] = (indices[2] + 1) % size;
     structs::point pontos[4] = { transf->getPoints()[indices[0]], transf->getPoints()[indices[1]], transf->getPoints()[indices[2]], transf->getPoints()[indices[3]] };
     getCatmullRomPoint(t, pontos, pos, deriv);
-    // getCatmullRomPoint(t, &points[indices[0]], &points[indices[1]], &points[indices[2]], &points[indices[3]], pos, deriv);
 }
 
 void catmull::calculateCurvePoints(structs::timedTransform* translation) {

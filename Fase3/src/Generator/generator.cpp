@@ -26,7 +26,7 @@ int createFile (vector<point> vertices, string name){
 }
 
 // Funcao que le o ficheiro patch que contem os dados da figura a ser feita com superficies de bezier
-figure readBezier(string fileName, int tesselation) {
+figure readBezierFile(string fileName, int tesselation) {
     ifstream fich;
     fich.open(fileName);
     figure fig;
@@ -35,17 +35,17 @@ figure readBezier(string fileName, int tesselation) {
         int numPatches = 0;
         int lineNum = 0;
 
-        figure points;
+        std::vector<point> points;
         vector<int> indices;
 
         while (getline(fich, line)) {
 
-            // Le o numero de patches
+            // Ler número de patches
             if (lineNum == 0) {
                 numPatches = atoi(line.c_str());
             }
 
-            // Le os indices dos pontos de control dos patches
+            // Ler indices dos pontos de controlo
             if (lineNum >= 1 && lineNum <= numPatches) {
                 string token;
                 istringstream tokenizer(line);
@@ -57,7 +57,7 @@ figure readBezier(string fileName, int tesselation) {
                 indices.push_back(stof(token));
             }
 
-            // Le os pontos de control
+            // Ler pontos de controlo
             if (lineNum > numPatches + 1) {
                 string token;
                 string tokens[3];
@@ -67,7 +67,8 @@ figure readBezier(string fileName, int tesselation) {
                 getline(tokenizer, tokens[1], ',');
                 getline(tokenizer, tokens[2]);
 
-                points.addPoint(stof(tokens[0]), stof(tokens[1]), stof(tokens[2]));
+                point ponto = {stof(tokens[0]), stof(tokens[1]), stof(tokens[2])};
+                points.push_back(ponto);
 
             }
             lineNum++;
@@ -181,7 +182,7 @@ int main(int argc, char* argv[]) {
             aux >> tesselation;
 
 
-            f = readBezier(fileBezier, tesselation);
+            f = readBezierFile(fileBezier, tesselation);
             if (!f.pontos.empty()) {
                 if (createFile(f.pontos, argv[4]) == 0) {
                     printf("Done\n");

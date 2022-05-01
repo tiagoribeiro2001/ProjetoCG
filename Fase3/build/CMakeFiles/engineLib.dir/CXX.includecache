@@ -22,18 +22,6 @@ GL/glut.h
 ../Matrices/matrices.hpp
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Matrices/matrices.hpp
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Engine/drawFunctions.cpp
-drawFunctions.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Engine/drawFunctions.hpp
-
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Engine/drawFunctions.hpp
-GLUT/glut.h
--
-GL/glut.h
--
-../Structs/structs.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Structs/structs.hpp
-
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Matrices/matrices.hpp
 
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase3/src/Structs/structs.hpp
