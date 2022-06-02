@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Generator/vertices.cpp
+cmath
+-
+vertices.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Generator/vertices.hpp
+../Matrices/matrices.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Matrices/matrices.hpp
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Generator/vertices.hpp
+../Structs/structs.hpp
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Structs/structs.hpp
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Matrices/matrices.hpp
+
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Structs/structs.hpp
+cstdio
+-
+cstdlib
+-
+vector
+-
+string
+-
+iostream
+-
+fstream
+-
+sstream
+-
+

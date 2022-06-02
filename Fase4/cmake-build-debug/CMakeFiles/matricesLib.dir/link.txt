@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmatricesLib.a  CMakeFiles/matricesLib.dir/src/Matrices/matrices.cpp.o
+/usr/bin/ranlib libmatricesLib.a

@@ -1,0 +1,9 @@
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/rebuild_cache.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/edit_cache.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/structsLib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/generatorLib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/matricesLib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/engineLib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/Lib.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/generator.dir
+/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles/engine.dir
