@@ -19,6 +19,7 @@ Call Stack (most recent call first):
   CMakeLists.txt:9 (find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
+-- Found DevIL: /usr/lib/x86_64-linux-gnu/libIL.so  
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/cmake-build-debug

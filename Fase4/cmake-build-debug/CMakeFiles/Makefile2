@@ -110,10 +110,10 @@ CMakeFiles/engineLib.dir/clean:
 # Target rules for target CMakeFiles/engine.dir
 
 # All Build rule for target.
+CMakeFiles/engine.dir/all: CMakeFiles/engineLib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/Lib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/matricesLib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/structsLib.dir/all
-CMakeFiles/engine.dir/all: CMakeFiles/engineLib.dir/all
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/depend
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/cmake-build-debug/CMakeFiles" --progress-num=6,7 "Built target engine"

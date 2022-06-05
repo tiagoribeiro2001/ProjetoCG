@@ -1,6 +1,7 @@
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
+#include <IL/il.h>
 #include <GL/glew.h>
 #include <GL/glut.h>
 #endif
@@ -20,11 +21,10 @@ using namespace draw;
 using namespace std;
 using namespace structs;
 
-group grupo;
+std::vector<light> luzes;
+int idLuz = 0;
 
-GLuint vertices;
-std::vector<float> vbo;
-int pontosLidos = 0;
+group grupo;
 
 bool wireframe = false;
 bool orbitas = false;
@@ -49,6 +49,7 @@ double getAlpha(int x) {
 double polarX (cameraPolar post) {
     return post.distance * cos(post.beta) * sin(post.alpha);
 }
+
 double polarY(cameraPolar post) {
     return post.distance * sin(post.beta);
 }
@@ -146,20 +147,48 @@ void drawFigures(group g) {
         }
     }
 
-    // Desenha todos os models
-    for (figure f : g.getModels()) {
-        drawFigure(f);
-    }
+    for(model m : g.getModels()){
 
-    glBindBuffer(GL_ARRAY_BUFFER, vertices);
-    glVertexPointer(3, GL_FLOAT, 0, 0);
-    glDrawArrays(GL_TRIANGLES, pontosLidos, g.getTrianglesCount());
-    pontosLidos += g.getTrianglesCount();
+        glPushAttrib(GL_LIGHTING_BIT);
+
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, m.diffuse);
+        glMaterialfv(GL_FRONT, GL_AMBIENT, m.ambient);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, m.specular);
+        glMaterialf(GL_FRONT, GL_SHININESS, m.shininess);
+        glMaterialfv(GL_FRONT, GL_EMISSION, m.emissive);
+
+        glBindBuffer(GL_ARRAY_BUFFER, m.verticesVBO);
+        glVertexPointer(3, GL_FLOAT, 0, 0);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m.indicesVBO);
+
+        glBindBuffer(GL_ARRAY_BUFFER, m.normaisVBO);
+        glNormalPointer(GL_FLOAT, 0, 0);
+
+        if (strcmp(m.getNameTex().c_str(), "") != 0) {
+
+            glBindBuffer(GL_ARRAY_BUFFER, m.getTexCoords());
+            glTexCoordPointer(2, GL_FLOAT, 0, 0);
+
+            glBindTexture(GL_TEXTURE_2D, m.getTexID());
+        }
+        else {
+            glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+            glDisable(GL_TEXTURE_2D);
+        }
+
+        glDrawElements(GL_TRIANGLES, m.getVerticesModel().size()/3, GL_UNSIGNED_INT,0);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        glPopAttrib();
+    }
 
     // Passa para o grupo filho (recursividade), sendo aplicadas as transformações aplicadas a este (PopMatrix é feito no final)
     for (group gr : g.getGroups()) {
         drawFigures(gr);
     }
+
     glPopMatrix();
 }
 
@@ -174,54 +203,158 @@ void renderScene(void){
               cam.settings[6], cam.settings[7], cam.settings[8]);
 
 
+
+    for(light luz : luzes){
+        glEnable(GL_LIGHT0 + luz.getID());
+        float white[4] = {1, 1, 1, 1};
+        float dark[4] = {0.1, 0.1, 0.1, 1};
+        glLightfv(GL_LIGHT0 + luz.getID(), GL_DIFFUSE, white);
+        glLightfv(GL_LIGHT0 + luz.getID(), GL_AMBIENT, dark);
+        glLightfv(GL_LIGHT0 + luz.getID(), GL_SPECULAR, white);
+
+        if (luz.getTipo() == typeLight::point){
+            float posicao[4] = {luz.getPosX(), luz.getPosY(), luz.getPosZ(), 1};
+            glLightfv(GL_LIGHT0 + luz.getID(), GL_POSITION, posicao);
+        }
+
+        else if (luz.getTipo() == typeLight::directional){
+            float direcao[4] = {luz.getDirX(), luz.getDirY(), luz.getDirZ(), 0};
+            glLightfv(GL_LIGHT0 + luz.getID(), GL_POSITION, direcao);
+        }
+
+        else if (luz.getTipo() == typeLight::spotlight){
+            float pos[4] = {luz.getPosX(), luz.getPosY(), luz.getPosZ(), 1};
+            float dir[4] = {luz.getDirX(), luz.getDirY(), luz.getDirZ(), 0};
+            float cutoff = luz.getCutoff();
+            glLightfv(GL_LIGHT0 + luz.getID(), GL_POSITION, pos);
+            glLightfv(GL_LIGHT0 + luz.getID(), GL_SPOT_DIRECTION, dir);
+            glLightf(GL_LIGHT0 + luz.getID(), GL_SPOT_CUTOFF, cutoff);
+            glLightf(GL_LIGHT0 + luz.getID(), GL_SPOT_EXPONENT, 0.0);
+        }
+    }
+
     // drawReferencial();
 
     drawFigures(grupo);
-    pontosLidos = 0;
 
     // End of frame
     glutSwapBuffers();
 }
 
+void loadTexture(model* modelo){
+    unsigned int t,tw,th;
+    unsigned char *texData;
+    unsigned int texID, texCoords;
+
+    // Colocar a origem da textura no canto inferior esquerdo
+    ilEnable(IL_ORIGIN_SET);
+    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+
+    // Carregar a textura para memória
+    ilGenImages(1, &t);
+    ilBindImage(t);
+    ilLoadImage((ILstring) modelo->getNameTex().c_str());
+    tw = ilGetInteger(IL_IMAGE_WIDTH);
+    th = ilGetInteger(IL_IMAGE_HEIGHT);
+
+    // Assegurar que a textura se encontra em RGBA (Red, Green, Blue, Alpha) com um byte (0 - 255) por componente
+    ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+    texData = ilGetData();
+
+    // Gerar a textura para a placa gráfica
+    glGenTextures(1, &texID);
+    glBindTexture(GL_TEXTURE_2D, texID);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    // Upload dos dados de imagem
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    // Store texture in GPU
+    glGenBuffers(1, &texCoords);
+    glBindBuffer(GL_ARRAY_BUFFER, texCoords);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 2 * modelo->sizeCoordTex(), modelo->getCoordTexModel().data(), GL_STATIC_DRAW);
+
+    modelo->setTexID(texID);
+    modelo->setTexCoords(texCoords);
+}
+
 // Função que lâ um ficheiro .3d
-group lerFich3D(string fileName, group g) {
+void lerFich3D(string fileName, model* modelo) {
     ifstream fich;
     fich.open(fileName);
     if (fich.is_open()) {
 
         figure figura;
         string line;
-        int count = 0;
+        getline(fich, line);
+        int numPontos = atoi(line.c_str());
 
-        while (getline(fich, line)) {
+        for (int i = 0; i < numPontos; i++) {
+            getline(fich, line);
             float coord[3];
 
             size_t pos = 0;
             string delimitador = " ";
             string token;
-            int i = 0;
+            int j = 0;
             while ((pos = line.find(delimitador)) != std::string::npos) {
                 token = line.substr(0, pos);
-                coord[i] = std::stof(token);
-                i++;
+                coord[j] = std::stof(token);
+                j++;
                 line.erase(0, pos + delimitador.length());
             }
-            // figura.addPoint(coord[0], coord[1], coord[2]);
-            vbo.push_back(coord[0]);
-            vbo.push_back(coord[1]);
-            vbo.push_back(coord[2]);
-            count++;
+            modelo->addVerticeModel(coord[0]);
+            modelo->addVerticeModel(coord[1]);
+            modelo->addVerticeModel(coord[2]);
         }
-        // g.addFigure(figura);
-        g.addTrianglesCount(count);
+
+        for (int i = 0; i < numPontos; i++) {
+            getline(fich, line);
+            float coord[3];
+
+            size_t pos = 0;
+            string delimitador = " ";
+            string token;
+            int j = 0;
+            while ((pos = line.find(delimitador)) != std::string::npos) {
+                token = line.substr(0, pos);
+                coord[j] = std::stof(token);
+                j++;
+                line.erase(0, pos + delimitador.length());
+            }
+            modelo->addNormalModel(coord[0]);
+            modelo->addNormalModel(coord[1]);
+            modelo->addNormalModel(coord[2]);
+        }
+
+        for (int i = 0; i < numPontos; i++) {
+            getline(fich, line);
+            float coord[2];
+
+            size_t pos = 0;
+            string delimitador = " ";
+            string token;
+            int j = 0;
+            while ((pos = line.find(delimitador)) != std::string::npos) {
+                token = line.substr(0, pos);
+                coord[j] = std::stof(token);
+                j++;
+                line.erase(0, pos + delimitador.length());
+            }
+            modelo->addCoordTexModel(coord[0]);
+            modelo->addCoordTexModel(coord[1]);
+        }
         fich.close();
     }
 
     else{
         printf("ERROR: Can't open .3d file: %s", fileName.c_str());
     }
-
-    return g;
 }
 
 // Função que lâ os parâmetros da camera no ficheiro XML
@@ -240,6 +373,40 @@ void lerCamera(TiXmlElement* camera){
                 camPol.alpha = getAlpha(cam.settings[0]);
             }
         }
+    }
+}
+
+void lerLights(TiXmlElement* lights){
+    TiXmlElement *light = lights->FirstChildElement("light");
+
+    while (light) {
+        structs::light luz{};
+        if (strcmp(light->Attribute("type"), "point") == 0){
+            float posX = atof(light->Attribute("posx"));
+            float posY = atof(light->Attribute("posy"));
+            float posZ = atof(light->Attribute("posz"));
+            luz.setPointLight(idLuz, posX, posY, posZ);
+        }
+        else if (strcmp(light->Attribute("type"), "directional") == 0){
+            float dirX = atof(light->Attribute("dirx"));
+            float dirY = atof(light->Attribute("diry"));
+            float dirZ = atof(light->Attribute("dirz"));
+            luz.setDirectionalLight(idLuz, dirX, dirY, dirZ);
+        }
+        else if (strcmp(light->Attribute("type"), "spot") == 0){
+            float posX = atof(light->Attribute("posx"));
+            float posY = atof(light->Attribute("posy"));
+            float posZ = atof(light->Attribute("posz"));
+            float dirX = atof(light->Attribute("dirx"));
+            float dirY = atof(light->Attribute("diry"));
+            float dirZ = atof(light->Attribute("dirz"));
+            float cutoff = atof(light->Attribute("cutoff"));
+            luz.setSpotlightLight(idLuz, posX, posY, posZ, dirX, dirY, dirZ, cutoff);
+        }
+        luzes.push_back(luz);
+        idLuz++;
+
+        light = light->NextSiblingElement("light");
     }
 }
 
@@ -268,13 +435,13 @@ group lerGroup(TiXmlElement* gr, group g){
                         g.addTimedTransformation(tt);
                     }
                     else {
-                    angle = atof(transChild->Attribute("angle"));
-                    x = atof(transChild->Attribute("x"));
-                    y = atof(transChild->Attribute("y"));
-                    z = atof(transChild->Attribute("z"));
+                        angle = atof(transChild->Attribute("angle"));
+                        x = atof(transChild->Attribute("x"));
+                        y = atof(transChild->Attribute("y"));
+                        z = atof(transChild->Attribute("z"));
 
-                    t.setTransform(x, y, z, angle, transformation::rotate);
-                    g.addTransform(t);
+                        t.setTransform(x, y, z, angle, transformation::rotate);
+                        g.addTransform(t);
                     }
                 }
                 else if (strcmp(transChild->Value(), "translate") == 0) {
@@ -334,8 +501,101 @@ group lerGroup(TiXmlElement* gr, group g){
 
             // Lê todos os ficheiros .3d
             while (model) {
+
+                structs::model modelo{};
+                // Lê o nome do ficheiro 3d
                 const char *ficheiro = model->Attribute("file");
-                g = lerFich3D(ficheiro, g);
+                lerFich3D(ficheiro, &modelo);
+
+                // Lê o campo da textura
+                TiXmlElement *texture = model->FirstChildElement("texture");
+                if (texture != nullptr) {
+                    const char *ficheiroTex = texture->Attribute("file");
+                    modelo.setNameTex(ficheiroTex);
+                }
+
+                // Lê o campo da color
+                TiXmlElement *color = model->FirstChildElement("color");
+                TiXmlElement *colorChild = color == nullptr ? nullptr : color->FirstChildElement();
+                while(colorChild){
+                    if(strcmp(colorChild->Value(), "diffuse") == 0) {
+                        float red = atof(colorChild->Attribute("R")) / 255;
+                        float green = atof(colorChild->Attribute("G")) / 255;
+                        float blue = atof(colorChild->Attribute("B")) / 255;
+                        modelo.diffuse[0] = red;
+                        modelo.diffuse[1] = green;
+                        modelo.diffuse[2] = blue;
+
+                    }
+                    else if(strcmp(colorChild->Value(), "ambient") == 0){
+                        float red = atof(colorChild->Attribute("R")) / 255;
+                        float green = atof(colorChild->Attribute("G")) / 255;
+                        float blue = atof(colorChild->Attribute("B")) / 255;
+                        modelo.ambient[0] = red;
+                        modelo.ambient[1] = green;
+                        modelo.ambient[2] = blue;
+                    }
+                    else if(strcmp(colorChild->Value(), "specular") == 0){
+                        float red = atof(colorChild->Attribute("R")) / 255;
+                        float green = atof(colorChild->Attribute("G")) / 255;
+                        float blue = atof(colorChild->Attribute("B")) / 255;
+                        modelo.specular[0] = red;
+                        modelo.specular[1] = green;
+                        modelo.specular[2] = blue;
+                    }
+                    else if(strcmp(colorChild->Value(), "emissive") == 0){
+                        float red = atof(colorChild->Attribute("R")) / 255;
+                        float green = atof(colorChild->Attribute("G")) / 255;
+                        float blue = atof(colorChild->Attribute("B")) / 255;
+                        modelo.emissive[0] = red;
+                        modelo.emissive[1] = green;
+                        modelo.emissive[2] = blue;
+                    }
+                    else if(strcmp(colorChild->Value(), "shininess") == 0){
+                        float value = atof(colorChild->Attribute("value"));
+                        modelo.shininess = value;
+                    }
+
+                    colorChild = colorChild->NextSiblingElement();
+                }
+
+                // Copy vertices to GPU
+                glGenBuffers(1, &modelo.verticesVBO);
+                glBindBuffer(GL_ARRAY_BUFFER, modelo.verticesVBO);
+                glBufferData(
+                        GL_ARRAY_BUFFER,
+                        sizeof(float) * modelo.getVerticesModel().size(),
+                        modelo.getVerticesModel().data(),
+                        GL_STATIC_DRAW);
+
+                std::vector<unsigned int> arrayIndices;
+                for(int i = 0; i < modelo.getVerticesModel().size(); i++){
+                    arrayIndices.push_back(i);
+                }
+
+                // Copy indices to GPU
+                glGenBuffers(1, &modelo.indicesVBO);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, modelo.indicesVBO);
+                glBufferData(
+                        GL_ELEMENT_ARRAY_BUFFER,
+                        sizeof(unsigned int) * arrayIndices.size(),
+                        arrayIndices.data(),
+                        GL_STATIC_DRAW);
+
+                // Copy normals to GPU
+                glGenBuffers(1, &modelo.normaisVBO);
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, modelo.normaisVBO);
+                glBufferData(
+                        GL_ELEMENT_ARRAY_BUFFER,
+                        sizeof(unsigned int) * modelo.getNormaisModel().size(),
+                        modelo.getNormaisModel().data(),
+                        GL_STATIC_DRAW);
+
+                if (strcmp(modelo.getNameTex().c_str(), "") != 0){
+                    loadTexture(&modelo);
+                }
+
+                g.addModel(modelo);
                 model = model->NextSiblingElement("model");
             }
         }
@@ -362,8 +622,16 @@ int lerFicheiroXML(std::string xml){
         TiXmlElement* cameraElement = worldElement->FirstChildElement();
         lerCamera(cameraElement);
 
+
+        // Ler definições das luzes
+        TiXmlElement* lightsElement = cameraElement->NextSiblingElement("lights");
+        if (lightsElement != nullptr){
+            lerLights(lightsElement);
+        }
+
+
         // Ler o group principal
-        TiXmlElement* groupElement = cameraElement->NextSiblingElement();
+        TiXmlElement* groupElement = cameraElement->NextSiblingElement("group");
         grupo = lerGroup(groupElement, grupo);
     }
     else{
@@ -431,39 +699,45 @@ int main(int argc, char** argv){
     }
     else {
         printf("Reading...\n");
+
+        // put GLUT init here
+        glutInit(&argc, argv);
+        glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
+        glutInitWindowPosition(100, 100);
+        glutInitWindowSize(800, 800);
+        glutCreateWindow("Normals and Texture Coordinates G07");
+
+        // vbo initialization
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+        // some OpenGL settings
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_CULL_FACE);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_BLEND);
+        glEnable(GL_NORMALIZE);
+        glEnable(GL_RESCALE_NORMAL);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_LIGHTING);
+        float amb[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb);
+
+        glewInit();
+        ilInit();
+
+        // put callback registry here
+        glutDisplayFunc(renderScene);
+        glutReshapeFunc(changeSize);
+        glutIdleFunc(renderScene);
+
+        glutKeyboardFunc(keyboardFunc);
+        glutSpecialFunc(processSpecialKeys);
+
         if(lerFicheiroXML(argv[1])==0) {
-
-            // put GLUT init here
-            glutInit(&argc, argv);
-            glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-            glutInitWindowPosition(100, 100);
-            glutInitWindowSize(800, 800);
-            glutCreateWindow("Normals and Texture Coordinates G07");
-
-            // put callback registry here
-            glutDisplayFunc(renderScene);
-            glutReshapeFunc(changeSize);
-            glutIdleFunc(renderScene);
-
-            glutKeyboardFunc(keyboardFunc);
-            glutSpecialFunc(processSpecialKeys);
-
-            // vbo initialization
-            #ifndef __APPLE__
-                glewInit();
-            #endif
-
-            glEnableClientState(GL_VERTEX_ARRAY);
-            glGenBuffers(1, &vertices);
-            glBindBuffer(GL_ARRAY_BUFFER, vertices);
-            glBufferData(GL_ARRAY_BUFFER, vbo.size() * sizeof(float), vbo.data(), GL_STATIC_DRAW);
-
-            // some OpenGL settings
-            glEnable(GL_DEPTH_TEST);
-            glEnable(GL_CULL_FACE);
-            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-            // enter GLUT�s main cycle
+            // enter GLUT's main cycle
             glutMainLoop();
         }
     }

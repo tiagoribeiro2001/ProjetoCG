@@ -218,10 +218,10 @@ CMakeFiles/Lib.dir/clean:
 # Target rules for target CMakeFiles/generator.dir
 
 # All Build rule for target.
+CMakeFiles/generator.dir/all: CMakeFiles/matricesLib.dir/all
 CMakeFiles/generator.dir/all: CMakeFiles/Lib.dir/all
 CMakeFiles/generator.dir/all: CMakeFiles/structsLib.dir/all
 CMakeFiles/generator.dir/all: CMakeFiles/generatorLib.dir/all
-CMakeFiles/generator.dir/all: CMakeFiles/matricesLib.dir/all
 	$(MAKE) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/depend
 	$(MAKE) -f CMakeFiles/generator.dir/build.make CMakeFiles/generator.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles" --progress-num=11,12 "Built target generator"
@@ -248,10 +248,10 @@ CMakeFiles/generator.dir/clean:
 # Target rules for target CMakeFiles/engine.dir
 
 # All Build rule for target.
+CMakeFiles/engine.dir/all: CMakeFiles/matricesLib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/engineLib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/Lib.dir/all
 CMakeFiles/engine.dir/all: CMakeFiles/structsLib.dir/all
-CMakeFiles/engine.dir/all: CMakeFiles/matricesLib.dir/all
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/depend
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/build/CMakeFiles" --progress-num=6,7 "Built target engine"

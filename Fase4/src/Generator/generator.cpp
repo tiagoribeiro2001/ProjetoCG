@@ -4,15 +4,31 @@
 using namespace std;
 using namespace generate;
 
-int createFile (vector<point> vertices, string name){
+int createFile (figure vertices, string name){
 
     ofstream file;
 
     file.open(name);
-    for(point p : vertices){
+
+    file << vertices.pontos.size() << "\n";
+
+    for(point p : vertices.pontos){
         file << p.x << " ";
         file << p.y << " ";
         file << p.z << " ";
+        file << "\n";
+    }
+
+    for(point p : vertices.normais){
+        file << p.x << " ";
+        file << p.y << " ";
+        file << p.z << " ";
+        file << "\n";
+    }
+
+    for(point p : vertices.coordTex){
+        file << p.x << " ";
+        file << p.y << " ";
         file << "\n";
     }
 
@@ -102,7 +118,7 @@ int main(int argc, char* argv[]) {
 
             f = createPlane(units, divs);
 
-            if (createFile(f.pontos, argv[4]) == 0) {
+            if (createFile(f, argv[4]) == 0) {
                 printf("Done.\n");
             }
 
@@ -115,7 +131,7 @@ int main(int argc, char* argv[]) {
 
             f = createBox(units, divs);
 
-            if (createFile(f.pontos, argv[4]) == 0) {
+            if (createFile(f, argv[4]) == 0) {
                 printf("Done.\n");
             }
         }
@@ -132,7 +148,7 @@ int main(int argc, char* argv[]) {
 
             f = createSphere(radius, stacks, slices);
 
-            if (createFile(f.pontos, argv[5]) == 0) {
+            if (createFile(f, argv[5]) == 0) {
                 printf("Done.\n");
             }
 
@@ -151,7 +167,7 @@ int main(int argc, char* argv[]) {
 
             f = createCone(radius, height, slices, stacks);
 
-            if (createFile(f.pontos, argv[6]) == 0) {
+            if (createFile(f, argv[6]) == 0) {
                 printf("Done.\n");
             }
         }
@@ -169,7 +185,7 @@ int main(int argc, char* argv[]) {
 
             f = createTorus(radiusI, radiusE, slices, rings);
 
-            if (createFile(f.pontos, argv[6]) == 0) {
+            if (createFile(f, argv[6]) == 0) {
                 printf("Done.\n");
             }
         }
@@ -184,7 +200,7 @@ int main(int argc, char* argv[]) {
 
             f = readBezierFile(fileBezier, tesselation);
             if (!f.pontos.empty()) {
-                if (createFile(f.pontos, argv[4]) == 0) {
+                if (createFile(f, argv[4]) == 0) {
                     printf("Done\n");
                 }
             }

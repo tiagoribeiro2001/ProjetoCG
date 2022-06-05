@@ -95,6 +95,7 @@ engine: /usr/lib/x86_64-linux-gnu/libglut.so
 engine: /usr/lib/x86_64-linux-gnu/libXmu.so
 engine: /usr/lib/x86_64-linux-gnu/libXi.so
 engine: /usr/lib/x86_64-linux-gnu/libGLEW.so
+engine: /usr/lib/x86_64-linux-gnu/libIL.so
 engine: CMakeFiles/engine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/engine.dir/link.txt --verbose=$(VERBOSE)

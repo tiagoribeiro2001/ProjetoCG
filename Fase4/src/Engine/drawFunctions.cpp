@@ -29,6 +29,8 @@ void draw::drawFigure(figure f) {
 
 // Função que desenho um referencial xyz
 void draw::drawReferencial() {
+    glDisable(GL_LIGHTING);
+
     glBegin(GL_LINES);
 
     // Eixo dos xx em vermelho
@@ -47,9 +49,13 @@ void draw::drawReferencial() {
     glVertex3f(0.0f, 0.0f, 100.0f);
 
     glEnd();
+
+    glEnable(GL_LIGHTING);
 }
 
 void draw::drawCatmullRomCurve(structs::timedTransform tt) {
+
+    glDisable(GL_LIGHTING);
 
     // Draw curve using line segments with GL_LINE_LOOP
     glBegin(GL_LINE_LOOP);
@@ -58,4 +64,6 @@ void draw::drawCatmullRomCurve(structs::timedTransform tt) {
         glVertex3f(p.x,p.y,p.z);
     }
     glEnd();
+
+    glEnable(GL_LIGHTING);
 }

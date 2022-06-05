@@ -11,6 +11,22 @@ void figure::addPoint(float a, float b, float c) {
     pontos.push_back(p);
 }
 
+void figure::addNormais(float a, float b, float c) {
+    point p{};
+    p.x = a;
+    p.y = b;
+    p.z = c;
+    normais.push_back(p);
+}
+
+void figure::addCoordTex(float a, float b, float c) {
+    point p{};
+    p.x = a;
+    p.y = b;
+    p.z = c;
+    coordTex.push_back(p);
+}
+
 // Altera os parâmetros de um objeto transform
 void transform::setTransform(float xx, float yy, float zz, float a, transformation t) {
     x = xx;
@@ -98,6 +114,62 @@ void timedTransform::addCurvePoints(point p){
 }
 
 // ---------------------
+// Modelo
+// ---------------------
+
+void model::addVerticeModel(float a) {
+    vertices.push_back(a);
+}
+
+void model::addNormalModel(float a) {
+    normais.push_back(a);
+}
+
+void model::addCoordTexModel(float a) {
+    coordTex.push_back(a);
+}
+
+void model::setNameTex(std::string nome) {
+    nameTex = nome;
+}
+
+std::string model::getNameTex(){
+    return nameTex;
+}
+
+int model::sizeCoordTex() {
+    return coordTex.size();
+}
+
+std::vector<float> model::getCoordTexModel(){
+    return coordTex;
+}
+
+std::vector<float> model::getVerticesModel(){
+    return vertices;
+}
+
+std::vector<float> model::getNormaisModel(){
+    return normais;
+}
+
+unsigned int model::getTexID(){
+    return texID;
+}
+
+unsigned int model::getTexCoords(){
+    return texCoords;
+}
+
+void model::setTexID(unsigned int i){
+    texID = i;
+}
+
+void model::setTexCoords(unsigned int i){
+    texCoords = i;
+}
+
+// ---------------------
 // Grupos
 // ---------------------
 
@@ -117,8 +189,8 @@ void group::addTimedTransformation(timedTransform t) {
 }
 
 // Adiciona uma figura a um grupo
-void group::addFigure(figure f) {
-    models.push_back(f);
+void group::addModel(model m) {
+    models.push_back(m);
 }
 
 // Adiciona um grupo filho ao grupo
@@ -132,7 +204,7 @@ int group::getTrianglesCount(){
     return trianglesCount;
 }
 
-std::vector<figure> group::getModels() {
+std::vector<model> group::getModels() {
     return models;
 }
 
@@ -146,4 +218,72 @@ std::vector<timedTransform> group::getTimedTransformations() {
 
 std::vector<group> group::getGroups() {
     return groups;
+}
+
+// ---------------------
+// Luzes
+// ---------------------
+
+void light::setPointLight(int i, float x, float y, float z){
+    tipo = typeLight::point;
+    id = i;
+    posX = x;
+    posY = y;
+    posZ = z;
+}
+
+void light::setDirectionalLight(int i, float x, float y, float z){
+    tipo = typeLight::directional;
+    id = i;
+    dirX = x;
+    dirY = y;
+    dirZ = z;
+}
+
+void light::setSpotlightLight(int i, float pX, float pY, float pZ, float dX, float dY, float dZ, float co){
+    tipo = typeLight::spotlight;
+    id = i;
+    posX = pX;
+    posY = pY;
+    posZ = pZ;
+    dirX = dX;
+    dirY = dY;
+    dirZ = dZ;
+    cutoff = co;
+}
+
+typeLight light::getTipo(){
+    return tipo;
+}
+
+int light::getID(){
+    return id;
+}
+
+float light::getPosX(){
+    return posX;
+}
+
+float light::getPosY(){
+    return posY;
+}
+
+float light::getPosZ(){
+    return posZ;
+}
+
+float light::getDirX(){
+    return dirX;
+}
+
+float light::getDirY(){
+    return dirY;
+}
+
+float light::getDirZ(){
+    return dirZ;
+}
+
+float light::getCutoff(){
+    return cutoff;
 }

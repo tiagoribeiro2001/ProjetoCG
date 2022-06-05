@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Engine/catmullRom.cpp
-catmullRom.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Engine/catmullRom.hpp
-cmath
--
-
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Engine/catmullRom.hpp
-GLUT/glut.h
--
-GL/glut.h
--
-../Structs/structs.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Structs/structs.hpp
-../Matrices/matrices.hpp
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Matrices/matrices.hpp
-
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Engine/drawFunctions.cpp
 drawFunctions.hpp
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Engine/drawFunctions.hpp
@@ -33,8 +17,6 @@ GL/glut.h
 -
 ../Structs/structs.hpp
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Structs/structs.hpp
-
-/home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Matrices/matrices.hpp
 
 /home/tiago/Desktop/Universidade/3º Ano/2º Semestre/CG/ProjetoCG/Fase4/src/Structs/structs.hpp
 cstdio
